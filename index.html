@@ -38,6 +38,22 @@
     });
     return false;
   }
+
+  // 统一的CTA点击处理函数
+  function handleCtaClick(url, event) {
+    // 阻止默认行为
+    if (event) event.preventDefault();
+    
+    // 上报Google事件
+    gtag_report_conversion(url);
+    
+    // 异步打开链接
+    setTimeout(() => {
+      window.open(url, '_blank');
+    }, 100);
+    
+    return false;
+  }
   </script>
 
   <!-- Fonts & icons -->
@@ -828,22 +844,6 @@
     function getRandomTelegramLink() {
       const randomIndex = Math.floor(Math.random() * telegramLinks.length);
       return telegramLinks[randomIndex];
-    }
-
-    // CTA按钮点击处理
-    function handleCtaClick(url, event) {
-      // 阻止默认行为
-      if (event) event.preventDefault();
-      
-      // 上报Google事件
-      gtag_report_conversion(url);
-      
-      // 异步打开Telegram链接
-      setTimeout(() => {
-        window.open(url, '_blank');
-      }, 100);
-      
-      return false;
     }
 
     // 页面交互功能
