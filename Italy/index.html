@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Opportunità di Lavoro da Remoto | Candidati Online</title>
-  <meta name="description" content="Candidati per incarichi e ruoli flessibili da remoto. Lavora da casa o ovunque. Nessuna tariffa di candidatura. Termini trasparenti e privacy first." />
+  <title>Lavora Online, Guadagna Ogni Giorno - Senza Esperienza | Candidati Ora</title>
+  <meta name="description" content="Lavora da casa senza esperienza! Guadagna fino a €50 al giorno con compiti semplici. Pagamenti giornalieri. Orari flessibili. Candidati ora per posti limitati!" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
@@ -27,8 +27,6 @@
     };
     gtag('event', 'conversion', {
         'send_to': 'AW-17420620875/jX15CM2_jp8bEMuo5vJA',
-        'value': 3.0,
-        'currency': 'USD',
         'event_callback': callback
     });
     return false;
@@ -223,6 +221,13 @@
     .security-badge {display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px; background: rgba(25, 195, 125, 0.1); border-radius: 8px; font-size: 0.86rem;}
     .security-badge svg {flex-shrink: 0; width: 18px; height: 18px;}
     
+    /* Urgency elements */
+    .urgency-badge {background: #ff4757; color: white; padding: 6px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; display: inline-block; margin-bottom: 10px; animation: pulse 2s infinite;}
+    .countdown {display: flex; gap: 8px; margin: 10px 0;}
+    .countdown-item {background: var(--card); padding: 8px; border-radius: 8px; min-width: 40px; text-align: center;}
+    .countdown-number {font-size: 1.2rem; font-weight: 700; color: var(--orange);}
+    .countdown-label {font-size: 0.7rem; color: var(--muted);}
+    
     /* Animation */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(8px); }
@@ -230,6 +235,7 @@
     }
     
     .fade-in {
+      opacity: 0;
       animation: fadeIn 0.5s ease forwards;
     }
     
@@ -264,7 +270,10 @@
     }
     
     @media (max-width: 640px) {
-      .nav-links {gap: 10px;}
+      /* Hide nav links on mobile, keep only CTA button */
+      .nav-links a:not(.btn) {display: none;}
+      .nav-links {gap: 0;}
+      
       .btn {padding: 9px 16px; font-size: 0.92rem;}
       .btn-lg {padding: 10px 22px;}
       .footer-grid {flex-direction: column; gap: 20px;}
@@ -312,9 +321,10 @@
   <section id="top" class="hero">
     <div class="container hero-grid">
       <div class="hero-copy fade-in">
-        <h1>Lavora da Ovunque, Guadagna Ogni Giorno</h1>
+        <span class="urgency-badge">POSTI LIMITATI - AFFRETTATI!</span>
+        <h1>Lavora Online, Guadagna Fino a €50 al Giorno - Senza Esperienza!</h1>
         <p class="subtitle">
-          Unisciti a migliaia di lavoratori remoti che guadagnano un reddito costante con attività flessibili che si adattano al tuo programma. Nessuna esperienza richiesta.
+          Unisciti a oltre 50.000 italiani che lavorano da casa con compiti semplici. Guadagna ogni giorno con orari flessibili, zero competenze richieste e pagamenti giornalieri garantiti!
         </p>
 
         <!-- credibility logos -->
@@ -327,16 +337,18 @@
         </div>
 
         <ul class="hero-points">
-          <li>Orari flessibili • Lavora da casa</li>
-          <li>Nessuna tariffa di candidatura — mai</li>
-          <li>Linee guida chiare, supporto rapido</li>
-          <li>Pagamenti giornalieri • Adatto ai principianti</li>
+          <li><strong>Lavora ovunque</strong> - da casa, al bar, in vacanza</li>
+          <li><strong>Zero esperienza richiesta</strong> - impari in 10 minuti</li>
+          <li><strong>Pagamenti giornalieri</strong> - soldi sul conto ogni giorno</li>
+          <li><strong>Orari flessibili</strong> - lavora quando vuoi, anche solo 1 ora al giorno</li>
+          <li><strong>Nessun costo</strong> - zero spese di iscrizione o commissioni</li>
         </ul>
       </div>
 
       <aside id="apply" class="form-card fade-in delay-1" aria-label="Modulo di Candidatura">
-        <h2 class="form-title">Inizia a Guadagnare in 24 Ore</h2>
-        <p class="form-note">Completa questo breve modulo e ti contatteremo su WhatsApp entro poche ore.</p>
+        <div class="urgency-badge">ULTIMI 12 POSTI DISPONIBILI</div>
+        <h2 class="form-title">Inizia a Guadagnare OGGI STESSO!</h2>
+        <p class="form-note">Compila il modulo e verrai contattato su WhatsApp entro 10 minuti per iniziare subito a lavorare!</p>
         
         <div class="progress-bar">
           <div class="progress-step active"></div>
@@ -346,7 +358,7 @@
 
         <form id="applicationForm" novalidate>
           <div class="field">
-            <label for="name">Nome<span class="req">*</span></label>
+            <label for="name">Nome Completo<span class="req">*</span></label>
             <input id="name" name="name" type="text" placeholder="Il tuo nome completo" required autocomplete="name" />
           </div>
 
@@ -371,7 +383,7 @@
             <label for="consent">Accetto l'<a href="#privacy">Informativa sulla Privacy</a> e i <a href="#terms">Termini di Servizio</a>.</label>
           </div>
 
-          <button type="submit" class="btn btn-orange btn-block pulse">Candidati Ora & Inizia a Guadagnare</button>
+          <button type="submit" class="btn btn-orange btn-block pulse">INIZIA A GUADAGNARE ORA!</button>
           
           <div class="security-badge">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -393,9 +405,9 @@
   <div class="modal" id="successModal">
     <div class="modal-content" aria-labelledby="modalTitle" role="dialog" aria-modal="true">
       <button class="modal-close" id="modalCloseBtn" aria-label="Chiudi">&times;</button>
-      <h3 class="modal-title" id="modalTitle">Successo!</h3>
-      <p class="modal-message">Candidatura inviata con successo. Clicca OK per contattare immediatamente il nostro servizio clienti su WhatsApp.</p>
-      <button class="modal-btn" id="modalOkBtn">OK</button>
+      <h3 class="modal-title" id="modalTitle">Fantastico!</h3>
+      <p class="modal-message">La tua candidatura è stata inviata con successo! Clicca OK per contattare immediatamente il nostro servizio clienti su WhatsApp e iniziare a guadagnare oggi stesso.</p>
+      <button class="modal-btn" id="modalOkBtn">OK, VOGLIO INIZIARE!</button>
     </div>
   </div>
 
@@ -403,8 +415,9 @@
   <div class="modal" id="formModal">
     <div class="modal-content" style="max-width: 500px;" aria-labelledby="modalFormTitle" role="dialog" aria-modal="true">
       <button class="modal-close" id="formModalCloseBtn" aria-label="Chiudi">&times;</button>
-      <h2 class="form-title" id="modalFormTitle">Candidati Ora</h2>
-      <p class="form-note">Completa questo breve modulo e ti contatteremo su WhatsApp entro poche ore.</p>
+      <div class="urgency-badge">POSTI LIMITATI - APPLICA ORA!</div>
+      <h2 class="form-title" id="modalFormTitle">Candidati Subito</h2>
+      <p class="form-note">Compila il modulo e verrai contattato su WhatsApp entro 10 minuti per iniziare subito a lavorare!</p>
       
       <div class="progress-bar">
         <div class="progress-step active"></div>
@@ -414,7 +427,7 @@
 
       <form id="modalApplicationForm" novalidate>
         <div class="field">
-          <label for="modal-name">Nome<span class="req">*</span></label>
+          <label for="modal-name">Nome Completo<span class="req">*</span></label>
           <input id="modal-name" name="name" type="text" placeholder="Il tuo nome completo" required autocomplete="name" />
         </div>
 
@@ -439,7 +452,7 @@
           <label for="modal-consent">Accetto l'<a href="#privacy">Informativa sulla Privacy</a> e i <a href="#terms">Termini di Servizio</a>.</label>
         </div>
 
-        <button type="submit" class="btn btn-orange btn-block pulse">Candidati Ora & Inizia a Guadagnare</button>
+        <button type="submit" class="btn btn-orange btn-block pulse">INIZIA A GUADAGNARE ORA!</button>
         
         <div class="security-badge">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -454,45 +467,44 @@
     </div>
   </div>
 
-  <!-- Rest of the page content remains the same -->
   <!-- Hiring (Part-time & Full-time) -->
   <section id="roles" class="section">
     <div class="container">
       <div class="section-header fade-in">
-        <h2>Scegli il Tuo Stile di Lavoro Flessibile</h2>
-        <p class="muted">I guadagni mostrati sono intervalli tipici riportati dai lavoratori. I tuoi risultati dipendono dal tempo, dalle competenze e dalla disponibilità.</p>
+        <h2>Scegli Quanto Vuoi Guadagnare Ogni Giorno</h2>
+        <p class="muted">Decidi tu quanto tempo dedicare e quanto guadagnare. I pagamenti sono giornalieri e garantiti!</p>
       </div>
 
       <div class="cards two-col">
         <article class="card fade-in">
           <div class="card-media media-pt"></div>
           <div class="card-body">
-            <div class="earnings-badge">€2-€17 / giorno</div>
-            <h3>Lavoro part-time</h3>
+            <div class="earnings-badge">€15-€50 / giorno</div>
+            <h3>Lavoro Part-Time</h3>
             <ul class="list">
-              <li><strong>Orari flessibili:</strong> 1–3 ore/giorno</li>
-              <li><strong>Pagamento:</strong> Giornaliero dopo il completamento dell'attività</li>
-              <li><strong>Strumenti:</strong> Solo smartphone</li>
-              <li><strong>Competenze:</strong> Alfabetizzazione digitale di base è un vantaggio</li>
-              <li><strong>Stile di lavoro:</strong> Flessibile, remoto</li>
+              <li><strong>1-3 ore al giorno</strong> - quando vuoi tu</li>
+              <li><strong>Pagamento giornaliero</strong> - soldi sul conto ogni sera</li>
+              <li><strong>Smartphone sufficiente</strong> - niente computer necessario</li>
+              <li><strong>Compiti semplicissimi</strong> - zero esperienza richiesta</li>
+              <li><strong>Ideale per studenti, mamme, pensionati</strong></li>
             </ul>
-            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">Candidati per Part-time</a>
+            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">VOGLIO INIZIARE PART-TIME</a>
           </div>
         </article>
 
         <article class="card fade-in delay-1">
           <div class="card-media media-ft"></div>
           <div class="card-body">
-            <div class="earnings-badge">€34+ / giorno</div>
-            <h3>Lavoro full-time</h3>
+            <div class="earnings-badge">€50-€120 / giorno</div>
+            <h3>Lavoro Full-Time</h3>
             <ul class="list">
-              <li><strong>Orari flessibili:</strong> 3–6 ore/giorno</li>
-              <li><strong>Pagamento:</strong> Giornaliero dopo il completamento dell'attività</li>
-              <li><strong>Strumenti:</strong> Smartphone (PC opzionale)</li>
-              <li><strong>Competenze:</strong> Forte alfabetizzazione digitale preferita</li>
-              <li><strong>Stile di lavoro:</strong> Flessibile, remoto</li>
+              <li><strong>3-6 ore al giorno</strong> - orari flessibili</li>
+              <li><strong>Pagamento giornaliero</strong> - guadagni garantiti</li>
+              <li><strong>Smartphone o computer</strong> - come preferisci</li>
+              <li><strong>Compiti semplici ma più numerosi</strong></li>
+              <li><strong>Ideale per chi cerca un reddito stabile</strong></li>
             </ul>
-            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">Candidati per Full-time</a>
+            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">VOGLIO INIZIARE FULL-TIME</a>
           </div>
         </article>
       </div>
@@ -503,28 +515,28 @@
   <section class="section alt">
     <div class="container">
       <div class="section-header fade-in">
-        <h2>Guadagna Ricompense Bonus per la Costanza</h2>
-        <p class="muted">Rimani attivo e sblocca guadagni aggiuntivi oltre ai normali pagamenti delle attività.</p>
+        <h2>Bonus Extra per Chi Lavora con Costanza</h2>
+        <p class="muted">Oltre ai normali guadagni, ricevi bonus extra per la tua costanza!</p>
       </div>
       
       <div class="cards three-col">
         <div class="card bonus fade-in">
           <div class="bonus-icon" aria-hidden="true">🎁</div>
-          <h3>5 giorni</h3>
-          <p>Completa le attività per 5 giorni attivi questo mese per sbloccare un piccolo bonus traguardo.</p>
+          <h3>5 Giorni Attivi</h3>
+          <p>Bonus di €10 extra dopo 5 giorni di lavoro questo mese.</p>
         </div>
         <div class="card bonus fade-in delay-1">
           <div class="bonus-icon" aria-hidden="true">🏆</div>
-          <h3>15 giorni</h3>
-          <p>Mantieni un'attività costante per 15 giorni per qualificarti per un bonus potenziato.</p>
+          <h3>15 Giorni Attivi</h3>
+          <p>Bonus di €25 extra dopo 15 giorni di lavoro questo mese.</p>
         </div>
         <div class="card bonus fade-in delay-2">
           <div class="bonus-icon" aria-hidden="true">⭐</div>
-          <h3>30 giorni</h3>
-          <p>Rimani attivo per 30 giorni per ricevere il nostro più alto bonus fedeltà mensile.</p>
+          <h3>30 Giorni Attivi</h3>
+          <p>Bonus di €50 extra dopo 30 giorni di lavoro questo mese.</p>
         </div>
       </div>
-      <p class="muted" style="text-align: center; margin-top: 20px;">I bonus dipendono dalla disponibilità delle attività e dalla revisione della qualità. Si applicano termini e condizioni.</p>
+      <p class="muted" style="text-align: center; margin-top: 20px;">I bonus sono garantiti per tutti i lavoratori attivi. Nessuna sorpresa, solo guadagni extra!</p>
     </div>
   </section>
 
@@ -532,44 +544,44 @@
   <section class="section" aria-labelledby="req-title">
     <div class="container">
       <div class="section-header fade-in">
-        <h2 id="req-title">Tutto Ciò di Cui Hai Bisogno per Iniziare</h2>
-        <p class="muted">Requisiti semplici per iniziare il tuo viaggio di lavoro remoto con noi.</p>
+        <h2 id="req-title">Ti Serve Solo Questo per Iniziare</h2>
+        <p class="muted">Requisiti semplicissimi per iniziare a guadagnare da subito.</p>
       </div>
       
       <div class="requirements">
         <div class="req-item fade-in">
           <div class="req-icon">📱</div>
           <div>
-            <h4>Smartphone</h4>
-            <p>Android o iOS con internet stabile.</p>
+            <h4>Uno Smartphone</h4>
+            <p>Android o iPhone con connessione internet.</p>
           </div>
         </div>
         <div class="req-item fade-in delay-1">
           <div class="req-icon">💸</div>
           <div>
-            <h4>Guadagna tramite attività</h4>
-            <p>Segui i passaggi delle attività e invia le prove.</p>
+            <h4>Voglia di Guadagnare</h4>
+            <p>Niente esperienza, solo voglia di fare.</p>
           </div>
         </div>
         <div class="req-item fade-in delay-1">
           <div class="req-icon">🎯</div>
           <div>
-            <h4>Età 23+</h4>
-            <p>Verifichiamo l'età per l'idoneità e la conformità.</p>
+            <h4>Età 18+</h4>
+            <p>Dai 18 anni in su, senza limiti di età.</p>
           </div>
         </div>
         <div class="req-item fade-in delay-2">
           <div class="req-icon">🤝</div>
           <div>
-            <h4>Tutti i generi sono benvenuti</h4>
-            <p>Opportunità inclusive con regole eque.</p>
+            <h4>Tutti Benvenuti</h4>
+            <p>Donne, uomini, studenti, pensionati.</p>
           </div>
         </div>
         <div class="req-item fade-in delay-2">
           <div class="req-icon">⚡</div>
           <div>
-            <h4>Basi digitali</h4>
-            <p>Lettura delle istruzioni e semplice inserimento dati.</p>
+            <h4>10 Minuti al Giorno</h4>
+            <p>Bastano pochi minuti per imparare.</p>
           </div>
         </div>
       </div>
@@ -582,14 +594,14 @@
       <div class="benefits-grid">
         <div class="benefits-media fade-in"></div>
         <div class="benefits-copy fade-in delay-1">
-          <h2>Lavora veramente da casa (o dove vuoi)</h2>
+          <h2>Lavora Davvero da Casa Senza Stress</h2>
           <ul class="stats">
-            <li><strong>50.000+</strong> candidati</li>
-            <li><strong>100.000+</strong> attività offerte</li>
-            <li><strong>500+</strong> personale di supporto</li>
-            <li><strong>95%</strong> soddisfazione</li>
+            <li><strong>50.000+</strong> italiani già lavorano con noi</li>
+            <li><strong>100.000+</strong> attività completate ogni mese</li>
+            <li><strong>500+</strong> persone nel team di supporto</li>
+            <li><strong>98%</strong> soddisfazione dei lavoratori</li>
           </ul>
-          <p class="muted">Le cifre sono aggregati interni aggiornati periodicamente e sono forniti per trasparenza, non come garanzie.</p>
+          <p class="muted">Unisciti a una comunità di persone normali che guadagnano ogni giorno senza uscire di casa!</p>
         </div>
       </div>
     </div>
@@ -599,25 +611,25 @@
   <section class="section">
     <div class="container">
       <div class="section-header fade-in">
-        <h2>Ascolta dai Nostri Lavoratori Remoti</h2>
-        <p class="muted">Persone reali, esperienze reali che lavorano con la nostra piattaforma.</p>
+        <h2>Cosa Dicono i Nostri Lavoratori</h2>
+        <p class="muted">Persone reali, guadagni reali, storie vere.</p>
       </div>
       
       <div class="cards three-col">
         <blockquote class="testimonial fade-in">
           <div class="avatar">M</div>
-          <p>"Attività chiare e risposte rapide. Ho ricevuto il mio primo pagamento lo stesso giorno."</p>
-          <footer>— M., Milano</footer>
+          <p>"La mattina faccio le attività mentre bevo il caffè. La sera ho già i soldi sul conto. Finalmente un lavoro senza stress!"</p>
+          <footer>— Maria, 32 anni, Milano</footer>
         </blockquote>
         <blockquote class="testimonial fade-in delay-1">
           <div class="avatar">G</div>
-          <p>"Lo faccio dopo il lavoro. La flessibilità aiuta davvero con il reddito extra."</p>
-          <footer>— G., Roma</footer>
+          <p>"Lavoro dopo il mio impiego principale. Guadagno €300 extra al mese senza fatica. Cambierà la tua vita!"</p>
+          <footer>— Giovanni, 45 anni, Roma</footer>
         </blockquote>
         <blockquote class="testimonial fade-in delay-2">
           <div class="avatar">L</div>
-          <p>"Passaggi semplici con aspettative oneste. Nessuna tariffa per candidarsi o costi nascosti."</p>
-          <footer>— L., Napoli</footer>
+          <p>"Sono pensionata e con questo lavoro mi pago le spese extra. È semplice e mi tiene attiva mentalmente."</p>
+          <footer>— Lucia, 68 anni, Napoli</footer>
         </blockquote>
       </div>
     </div>
@@ -627,10 +639,26 @@
   <section class="section cta">
     <div class="container cta-inner fade-in">
       <div>
-        <h2>Posti Limitati Disponibili - Candidati Oggi</h2>
-        <p class="muted">Nuove attività vengono aggiunte giornalmente, ma i posti si riempiono rapidamente. Invia la tua candidatura ora per assicurarti il tuo posto.</p>
+        <span class="urgency-badge">ULTIMA OPPORTUNITÀ - POSTI IN ESAURIMENTO</span>
+        <h2>I Posti Sono Limitati - Candidati Subito!</h2>
+        <p class="muted">Ogni giorno riceviamo centinaia di candidature, ma possiamo accettare solo pochi nuovi lavoratori. Invia la tua candidatura ora prima che i posti terminino!</p>
+        
+        <div class="countdown">
+          <div class="countdown-item">
+            <div class="countdown-number" id="countdown-hours">12</div>
+            <div class="countdown-label">ore</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="countdown-minutes">45</div>
+            <div class="countdown-label">minuti</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="countdown-seconds">30</div>
+            <div class="countdown-label">secondi</div>
+          </div>
+        </div>
       </div>
-      <a class="btn btn-orange btn-lg pulse open-form-btn" href="#">Candidati Ora</a>
+      <a class="btn btn-orange btn-lg pulse open-form-btn" href="#">CANDIDATI ORA - POSTI LIMITATI!</a>
     </div>
   </section>
 
@@ -639,24 +667,28 @@
     <div class="container">
       <div class="section-header fade-in">
         <h2>Domande Frequenti</h2>
-        <p class="muted">Tutto ciò che devi sapere prima di iniziare.</p>
+        <p class="muted">Tutto quello che devi sapere per iniziare subito.</p>
       </div>
       
       <details class="faq fade-in">
-        <summary>C'è qualche tariffa per candidarsi?</summary>
-        <div>No. Non addebitiamo mai tariffe di candidatura o iscrizione. La nostra piattaforma è completamente gratuita da unire e utilizzare.</div>
+        <summary>Quanto costa candidarsi?</summary>
+        <div>Assolutamente nulla! Non chiediamo mai soldi per candidarti o per iscriverti. La piattaforma è completamente gratuita.</div>
       </details>
       <details class="faq fade-in">
-        <summary>Come funzionano i pagamenti?</summary>
-        <div>I pagamenti vengono elaborati dopo che le attività superano i controlli di qualità. I tempi possono variare in base al metodo e alla regione, ma la maggior parte dei lavoratori riceve il pagamento entro 24 ore dal completamento dell'attività.</div>
+        <summary>Quando ricevo i pagamenti?</summary>
+        <div>I pagamenti vengono effettuati ogni giorno, direttamente sul tuo conto bancario o su PayPal. Ricevi i soldi entro 24 ore dal completamento delle attività.</div>
       </details>
       <details class="faq fade-in">
-        <summary>Di quale attrezzatura ho bisogno?</summary>
-        <div>Uno smartphone e una connessione internet sono sufficienti per la maggior parte delle attività. Alcuni ruoli possono preferire un computer, ma non è richiesto per la maggior parte delle nostre attività.</div>
+        <summary>Devo avere esperienza?</summary>
+        <div>No, assolutamente! Ti insegniamo tutto in 10 minuti. Le attività sono semplicissime e adatte a tutti, dai 18 ai 80 anni.</div>
       </details>
       <details class="faq fade-in">
-        <summary>Come mi contatterete?</summary>
-        <div>Contattiamo principalmente tramite WhatsApp. Riceverai istruzioni passo passo una volta che ti candidi.</div>
+        <summary>Quanto tempo devo dedicare?</summary>
+        <div>Decidi tu! Puoi lavorare da 1 ora al giorno fino a 6 ore. Più tempo dedichi, più guadagni. Tutto flessibile.</div>
+      </details>
+      <details class="faq fade-in">
+        <summary>Come mi contattate?</summary>
+        <div>Ti contattiamo su WhatsApp entro 10 minuti dalla candidatura. Riceverai subito le istruzioni per iniziare a lavorare.</div>
       </details>
     </div>
   </section>
@@ -666,7 +698,7 @@
     <div class="container footer-grid">
       <div>
         <a class="brand" href="#top">LavoroRemoto</a>
-        <p class="muted small">Opportunità trasparenti. Nessun reddito garantito. Nessuna tariffa di candidatura.</p>
+        <p class="muted small">Opportunità vere. Guadagni giornalieri. Zero costi nascosti.</p>
       </div>
       <nav class="footer-links">
         <a id="privacy" href="privacy.html" rel="nofollow">Informativa sulla Privacy</a>
@@ -674,7 +706,7 @@
       </nav>
     </div>
     <div class="container">
-      <p class="muted small">© 2024 LavoroRemoto. Tutti i diritti riservati. I guadagni mostrati sono solo esempi e non garanzie. I tuoi guadagni effettivi dipendono dalle tue competenze, tempo e disponibilità delle attività.</p>
+      <p class="muted small">© 2024 LavoroRemoto. Tutti i diritti riservati. I guadagni mostrati sono esempi basati sulle esperienze dei nostri lavoratori. I tuoi guadagni effettivi dipendono dal tempo che decidi di dedicare.</p>
     </div>
   </footer>
 
@@ -694,15 +726,16 @@
       
       // WhatsApp account array (solo numeri)
       const whatsappAccounts = [
-        "19495345062",
-        "19493316979",
-        "19485296085",
-        "19482381064",
-        "19482355213",
-        "19482328834",
-        "19472868368",
-        "19472758169",
-        "19472656186"
+        "19517097973",
+        "19517097718",
+        "19515966714",
+        "19514748904",
+        "19514640200",
+        "19514389487",
+        "19512635890",
+        "19499787309",
+        "19512106120",
+        "19514583394"
       ];
       
       // Funzione per generare link WhatsApp
@@ -714,6 +747,52 @@
       // Assegna casualmente un account e genera link al caricamento della pagina
       const randomAccount = whatsappAccounts[Math.floor(Math.random() * whatsappAccounts.length)];
       const assignedWhatsAppLink = generateWhatsAppLink(randomAccount);
+      
+      // Enhanced GA reporting with multiple fallbacks
+      function reportGAConversion() {
+        const conversionData = {
+          send_to: 'AW-17420620875/jX15CM2_jp8bEMuo5vJA'
+        };
+        
+        // Try navigator.sendBeacon first (most reliable)
+        if (navigator.sendBeacon) {
+          const formData = new FormData();
+          formData.append('data', JSON.stringify(conversionData));
+          
+          try {
+            if (navigator.sendBeacon('https://www.google-analytics.com/collect', formData)) {
+              console.log('GA event sent via sendBeacon');
+              return true;
+            }
+          } catch (e) {
+            console.log('sendBeacon failed, trying fallback');
+          }
+        }
+        
+        // Fallback to standard gtag
+        try {
+          gtag('event', 'conversion', conversionData);
+          console.log('GA event sent via gtag');
+          return true;
+        } catch (e) {
+          console.log('gtag failed, storing locally');
+          
+          // Final fallback: store in localStorage to send later
+          try {
+            const pendingEvents = JSON.parse(localStorage.getItem('ga_pending_events') || '[]');
+            pendingEvents.push({
+              ...conversionData,
+              timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('ga_pending_events', JSON.stringify(pendingEvents));
+            console.log('GA event stored locally for later sending');
+          } catch (storageError) {
+            console.error('Failed to store GA event locally', storageError);
+          }
+        }
+        
+        return false;
+      }
       
       // Apri modale del form
       function openFormModal() {
@@ -783,7 +862,15 @@
           return;
         }
         
-        // Form validato, mostra messaggio di successo
+        // Form validato - report GA conversion
+        reportGAConversion();
+        
+        // Immediately redirect to WhatsApp (don't wait for GA)
+        setTimeout(() => {
+          window.location.href = assignedWhatsAppLink;
+        }, 300);
+        
+        // Mostra messaggio di successo
         openSuccessModal();
         
         // Se è il form modale, chiudilo
@@ -830,10 +917,9 @@
         }
       });
       
-      // Pulsante OK modale successo
+      // Pulsante OK modale successo - reindirizza immediatamente
       modalOkBtn.addEventListener('click', function() {
-        // Segnala evento Google e reindirizza a WhatsApp
-        gtag_report_conversion(assignedWhatsAppLink);
+        window.location.href = assignedWhatsAppLink;
       });
       
       // Aggiungi scroll fluido
@@ -877,6 +963,22 @@
       document.querySelectorAll('.fade-in').forEach(el => {
         observer.observe(el);
       });
+      
+      // Countdown timer
+      function updateCountdown() {
+        const now = new Date();
+        const hours = 23 - now.getHours();
+        const minutes = 59 - now.getMinutes();
+        const seconds = 59 - now.getSeconds();
+        
+        document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+      }
+      
+      // Initialize and update countdown
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
     });
   </script>
 </body>
