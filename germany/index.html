@@ -726,8 +726,6 @@
             try {
                 gtag('event', 'conversion', {
                     'send_to': 'AW-17420620875/MKNhCN34158bEMuo5vJA',
-                    'value': 1.0,
-                    'currency': 'EUR',
                     'transaction_id': ''
                 });
                 console.log('GA conversion sent via gtag');
@@ -785,8 +783,6 @@
                 pending.forEach(function(conversion) {
                     gtag('event', 'conversion', {
                         'send_to': 'AW-17420620875/' + conversion.label,
-                        'value': 1.0,
-                        'currency': 'EUR'
                     });
                 });
                 localStorage.removeItem('ga_pending_conversions');
