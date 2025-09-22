@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Online Arbeiten, Täglich Verdienen - Ohne Erfahrung | Jetzt Bewerben</title>
+  <meta name="description" content="Arbeiten Sie von zu Hause ohne Erfahrung! Verdienen Sie bis zu 50 € pro Tag mit einfachen Aufgaben. Tägliche Auszahlungen. Flexible Arbeitszeiten. Jetzt bewerben, da Plätze begrenzt sind!" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111827;
+      --muted:#9aa3af;
+      --text:#e5e7eb;
+      --white:#ffffff;
+      --orange:#ff7a1a;
+      --orange-600:#e96e15;
+      --orange-300:#ffa057;
+      --green:#19c37d;
+      --blue:#3b82f6;
+      --ring: 0 0 0 3px rgba(255,122,26,.25);
+      --radius:12px;
+      --transition: all 0.3s ease;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:#070a0f;color:var(--text);font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;line-height:1.4; font-size: 15px;}
+    img{max-width:100%;display:block}
+    a{color:var(--text);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{width:min(1120px,92%);margin-inline:auto}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(7,10,15,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
+    .brand{font-weight:800;letter-spacing:.3px;font-size:1.2rem;}
+    .nav-links{display:flex;gap:16px;align-items:center}
+    .nav-link{opacity:.85; transition: var(--transition); font-size: 0.95rem;}
+    .nav-link:hover{opacity:1; color: var(--orange);}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 20px;border-radius:10px;border:0;font-weight:600;cursor:pointer;transition:var(--transition); font-size: 0.95rem;}
+    .btn-lg{padding:12px 28px;font-size:1.05rem;}
+    .btn-block{width:100%}
+    .btn-orange{background:var(--orange);color:#0b0f14; box-shadow: 0 4px 10px rgba(255, 122, 26, 0.25);}
+    .btn-orange:hover{background:var(--orange-600); transform: translateY(-2px); box-shadow: 0 6px 14px rgba(255, 122, 26, 0.35);}
+    .btn:focus{outline:none;box-shadow:var(--ring)}
+    
+    .hero{position:relative;padding:60px 0 30px; overflow: hidden;}
+    .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:stretch}
+    .hero-copy h1{font-size:38px;margin:0 0 10px; line-height: 1.2; font-weight: 800;}
+    .subtitle{color:var(--muted);max-width:48ch;margin-bottom:14px; font-size: 1.05rem;}
+    .hero-points{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:10px;color:#cfd5dd; font-weight: 500;}
+    .hero-points li {display: flex; align-items: center; gap: 8px; font-size: 0.95rem;}
+    .hero-points li:before {content: "✓"; color: var(--green); font-weight: bold;}
+    
+    .hero-bg{position:absolute;inset:0;z-index:-1;background:
+        linear-gradient(180deg,rgba(11,15,20,.85),rgba(11,15,20,.95)),
+        url('https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80') center/cover no-repeat;}
+
+    .logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px; align-items: center;}
+    .logo{font-size:13px;padding:8px 14px;border:1px dashed rgba(255,255,255,.15);border-radius:10px;color:#cfd5dd;background:rgba(255,255,255,.03); transition: var(--transition);}
+    .logo:hover {transform: translateY(-2px); border-color: var(--orange); color: var(--white);}
+
+    .form-card{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:var(--radius);padding:24px; box-shadow: 0 16px 32px rgba(0,0,0,0.2); position: relative;}
+    .form-card:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--orange), var(--green));
+        border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .form-title{margin:0 0 8px; font-size: 22px;}
+    .form-note{color:var(--muted);margin:0 0 14px;font-size:0.92rem; line-height: 1.5;}
+    .field{margin-bottom:14px; position: relative;}
+    .field.check{display:flex;align-items:flex-start; gap: 8px;}
+    .field.check label {margin-bottom: 0; display: inline; font-weight: normal;}
+    label{display:block;margin-bottom:6px;font-weight:600; font-size: 0.92rem;}
+    .req{color:var(--green)}
+    input,select{width:100%;background:#0c1220;color:var(--text);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:12px 14px;outline:none; font-family: inherit; font-size: 0.95rem; transition: var(--transition);}
+    input:focus,select:focus{box-shadow:var(--ring);border-color:var(--orange); transform: translateY(-1px);}
+    .form-status{margin-top:14px;font-size:0.92rem; padding: 10px; border-radius: 8px; background: rgba(25, 195, 125, 0.1); border: 1px solid rgba(25, 195, 125, 0.2);}
+    .form-status.success{color:#59d38c}
+    .form-status.error{color:#ff8b8b; background: rgba(255, 139, 139, 0.1); border-color: rgba(255, 139, 139, 0.2);}
+    
+    /* Validation styles */
+    input.invalid {border-color: #ff4757;}
+    .error-message {color: #ff4757; font-size: 0.85rem; margin-top: 5px; display: none;}
+    input.invalid + .error-message {display: block;}
+
+    /* Phone input styles */
+    .phone-input-group {display: flex;}
+    .country-code {flex: 0 0 auto; background: rgba(255,255,255,0.05); padding: 12px 14px; border: 1px solid rgba(255,255,255,.15); border-right: none; border-radius: 10px 0 0 10px; display: flex; align-items: center;}
+    .phone-input {border-radius: 0 10px 10px 0; flex: 1;}
+    
+    .progress-bar {display: flex; margin: 16px 0; gap: 6px;}
+    .progress-step {flex: 1; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px;}
+    .progress-step.active {background: var(--orange);}
+
+    /* Modal styles */
+    .modal {position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s ease;}
+    .modal.active {opacity: 1; visibility: visible;}
+    .modal-content {background: var(--card); border-radius: var(--radius); padding: 24px; max-width: 400px; width: 90%; text-align: center;}
+    .modal-title {font-size: 1.5rem; margin-bottom: 16px; color: var(--orange);}
+    .modal-message {margin-bottom: 24px; line-height: 1.5;}
+    .modal-btn {background: var(--orange); color: #0b0f14; border: none; border-radius: 8px; padding: 10px 20px; font-weight: 600; cursor: pointer; transition: var(--transition);}
+    .modal-btn:hover {background: var(--orange-600);}
+
+    /* Close button for modal */
+    .modal-close { position: absolute; top: 10px; right: 12px; background: transparent; border: none; font-size: 22px; color: var(--muted); cursor: pointer; }
+    .modal-close:hover { color: var(--text); }
+
+    .section{padding:60px 0}
+    .section.alt{background:#0b1220}
+    h2{margin:0 0 14px;font-size:32px; font-weight: 800;}
+    .muted{color:var(--muted); line-height: 1.5;}
+    .small{font-size:0.88rem}
+    
+    .section-header {text-align: center; max-width: 700px; margin: 0 auto 40px;}
+    
+    .cards{display:grid;gap:20px}
+    .two-col{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px; transition: var(--transition);}
+    .card:hover {transform: translateY(-3px); border-color: rgba(255,255,255,0.15); box-shadow: 0 8px 24px rgba(0,0,0,0.15);}
+    .card-media{height:140px;border-radius:10px;background:linear-gradient(135deg,#152238,#1d2a44); position: relative; overflow: hidden;}
+    .card-media:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(25,195,125,0.1), rgba(59,130,246,0.1));
+    }
+    .media-pt{background-image:linear-gradient(135deg,#1a2f4a,#204564)}
+    .media-ft{background-image:linear-gradient(135deg,#2b2c52,#3a3e7a)}
+    .card-body h3{margin:14px 0 10px; font-size: 1.3rem;}
+    
+    .earnings-badge {background: var(--green); color: var(--bg); padding: 3px 10px; border-radius: 18px; font-weight: 700; font-size: 0.86rem; display: inline-block; margin-bottom: 10px;}
+    
+    .list{padding-left:0;margin:0;display:grid;gap:8px}
+    .list li{margin-left:0; display: flex; align-items: flex-start; gap: 8px; font-size: 0.92rem;}
+    .list li:before {content: "•"; color: var(--orange); font-weight: bold;}
+    
+    .bonus{text-align:center; position: relative;}
+    .bonus-icon{font-size:32px;margin-bottom:10px; display: inline-flex; width: 60px; height: 60px; background: rgba(255,122,26,0.1); border-radius: 50%; align-items: center; justify-content: center;}
+    .bonus:hover .bonus-icon {transform: scale(1.05); transition: var(--transition);}
+    
+    .requirements{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+    .req-item{display:flex;gap:10px;background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px; transition: var(--transition);}
+    .req-item:hover {border-color: rgba(255,122,26,0.3); transform: translateY(-2px);}
+    .req-icon{font-size:22px; color: var(--orange);}
+    
+    .benefits-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+    .benefits-media{height:240px;border-radius:12px;background:
+        radial-gradient(120px 120px at 30% 40%, #213250 0%, transparent 60%),
+        linear-gradient(135deg,#1a2442,#122039); position: relative; overflow: hidden;}
+    .benefits-media:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80') center/cover no-repeat;
+        opacity: 0.4;
+        mix-blend-mode: overlay;
+    }
+    .stats{list-style:none;padding:0;margin:0 0 14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .stats li{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px;text-align:center; transition: var(--transition);}
+    .stats li:hover {transform: translateY(-2px); border-color: rgba(255,122,26,0.3);}
+    .stats strong {display: block; font-size: 1.6rem; color: var(--orange); margin-bottom: 4px;}
+    
+    .testimonial{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px;margin:0; position: relative; transition: var(--transition);}
+    .testimonial:hover {transform: translateY(-2px); border-color: rgba(255,255,255,0.15);}
+    .testimonial:before {
+        content: """;
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        font-size: 50px;
+        color: rgba(255,122,26,0.2);
+        font-family: Georgia, serif;
+    }
+    .testimonial p{margin:0 0 14px; font-style: italic; position: relative; z-index: 1; font-size: 0.95rem;}
+    .testimonial footer {color: var(--orange); font-weight: 600; font-size: 0.92rem;}
+    
+    .avatar {width: 44px; height: 44px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 10px; font-size: 1.1rem;}
+    
+    .cta{background:linear-gradient(180deg,#0b1220,#0b0f14); padding: 60px 0; text-align: center;}
+    .cta-inner{max-width: 700px; margin: 0 auto;}
+    .cta h2 {margin-bottom: 14px;}
+    
+    .faq{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;margin-bottom:14px; transition: var(--transition);}
+    .faq:hover {border-color: rgba(255,255,255,0.15);}
+    .faq summary{cursor:pointer; font-weight: 600; padding: 6px 0; font-size: 0.95rem;}
+    .faq div {padding: 10px 0; color: var(--muted); font-size: 0.92rem;}
+    
+    .footer{border-top:1px solid rgba(255,255,255,.08);padding:32px 0 20px;background:#090d13}
+    .footer-grid{display:flex;justify-content:space-between;gap:18px;align-items:flex-start; margin-bottom: 20px;}
+    .footer-links{display:flex;gap:16px;flex-wrap:wrap}
+    
+    .security-badge {display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px; background: rgba(25, 195, 125, 0.1); border-radius: 8px; font-size: 0.86rem;}
+    .security-badge svg {flex-shrink: 0; width: 18px; height: 18px;}
+    
+    /* Urgency elements */
+    .urgency-badge {background: #ff4757; color: white; padding: 6px 12px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; display: inline-block; margin-bottom: 10px; animation: pulse 2s infinite;}
+    .countdown {display: flex; gap: 8px; margin: 10px 0;}
+    .countdown-item {background: var(--card); padding: 8px; border-radius: 8px; min-width: 40px; text-align: center;}
+    .countdown-number {font-size: 1.2rem; font-weight: 700; color: var(--orange);}
+    .countdown-label {font-size: 0.7rem; color: var(--muted);}
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    
+    /* Pulse animation for CTA */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr; gap: 28px;}
+      .two-col{grid-template-columns:1fr; gap: 18px;}
+      .three-col{grid-template-columns:1fr; gap: 18px;}
+      .requirements{grid-template-columns:repeat(2,minmax(0,1fr)); gap: 12px;}
+      .benefits-grid{grid-template-columns:1fr; gap: 20px;}
+      .cta-inner{flex-direction:column;align-items:flex-start}
+      .stats{grid-template-columns:1fr; gap: 12px;}
+      .hero-copy h1 {font-size: 32px;}
+      h2 {font-size: 28px;}
+      .section {padding: 50px 0;}
+      .section-header {margin-bottom: 32px;}
+    }
+    
+    @media (max-width: 640px) {
+      /* Hide nav links on mobile, keep only CTA button */
+      .nav-links a:not(.btn) {display: none;}
+      .nav-links {gap: 0;}
+      
+      .btn {padding: 9px 16px; font-size: 0.92rem;}
+      .btn-lg {padding: 10px 22px;}
+      .footer-grid {flex-direction: column; gap: 20px;}
+      .footer-links {flex-direction: column; gap: 10px;}
+      .requirements {grid-template-columns: 1fr; gap: 10px;}
+      .hero {padding: 50px 0 24px;}
+      .hero-copy h1 {font-size: 28px;}
+      h2 {font-size: 26px;}
+      .section {padding: 40px 0;}
+      .cta {padding: 50px 0;}
+      .logos {justify-content: center;}
+      .form-card {padding: 20px;}
+      .card {padding: 18px;}
+      .testimonial {padding: 18px;}
+      .stats li {padding: 12px;}
+      .benefits-media {height: 200px;}
+    }
+    
+    @media (max-width: 480px) {
+      .hero-copy h1 {font-size: 26px;}
+      h2 {font-size: 24px;}
+      .brand {font-size: 1.1rem;}
+      .nav-link {font-size: 0.9rem;}
+      .btn {font-size: 0.9rem;}
+      .hero-points li {font-size: 0.9rem;}
+      .subtitle {font-size: 1rem;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Nav -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="Home">RemoteArbeit</a>
+      <nav class="nav-links">
+        <a href="#roles" class="nav-link">Positionen</a>
+        <a href="#benefits" class="nav-link">Vorteile</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="#" class="btn btn-orange" id="openFormBtn">Jetzt bewerben</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero + Form -->
+  <section id="top" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy fade-in">
+        <span class="urgency-badge">BEGRENZTE PLÄTZE - JETZT BEWERBEN!</span>
+        <h1>Online Arbeiten, Bis Zu 50 € Pro Tag Verdienen - Ohne Erfahrung!</h1>
+        <p class="subtitle">
+          Schließen Sie sich über 50.000 Deutschen an, die von zu Hause aus mit einfachen Aufgaben arbeiten. Verdienen Sie täglich mit flexiblen Arbeitszeiten, ohne Vorkenntnisse und mit garantierten täglichen Auszahlungen!
+        </p>
+
+        <!-- credibility logos -->
+        <div class="logos" aria-label="Brands">
+          <span class="logo" aria-label="Siemens" title="Siemens">Siemens</span>
+          <span class="logo" aria-label="BMW" title="BMW">BMW</span>
+          <span class="logo" aria-label="Deutsche Telekom" title="Deutsche Telekom">Telekom</span>
+          <span class="logo" aria-label="Volkswagen" title="Volkswagen">Volkswagen</span>
+          <span class="logo" aria-label="Bosch" title="Bosch">Bosch</span>
+        </div>
+
+        <ul class="hero-points">
+          <li><strong>Überall arbeiten</strong> - von zu Hause, im Café, im Urlaub</li>
+          <li><strong>Keine Erfahrung nötig</strong> - lernen Sie in 10 Minuten</li>
+          <li><strong>Tägliche Auszahlungen</strong> - Geld täglich auf Ihr Konto</li>
+          <li><strong>Flexible Arbeitszeiten</strong> - arbeiten Sie wann Sie wollen, sogar nur 1 Stunde täglich</li>
+          <li><strong>Keine Kosten</strong> - keine Anmeldegebühren oder Provisionen</li>
+        </ul>
+      </div>
+
+      <aside id="apply" class="form-card fade-in delay-1" aria-label="Bewerbungsformular">
+        <div class="urgency-badge">NUR NOCH 12 PLÄTZE VERFÜGBAR</div>
+        <h2 class="form-title">Starten Sie Noch Heute Mit Dem Verdienen!</h2>
+        <p class="form-note">Füllen Sie das Formular aus und wir kontaktieren Sie innerhalb von 10 Minuten auf WhatsApp, um sofort mit der Arbeit zu beginnen!</p>
+        
+        <div class="progress-bar">
+          <div class="progress-step active"></div>
+          <div class="progress-step"></div>
+          <div class="progress-step"></div>
+        </div>
+
+        <form id="applicationForm" novalidate>
+          <div class="field">
+            <label for="name">Vollständiger Name<span class="req">*</span></label>
+            <input id="name" name="name" type="text" placeholder="Ihr vollständiger Name" required autocomplete="name" />
+            <div class="error-message">Bitte geben Sie Ihren vollständigen Namen ein.</div>
+          </div>
+
+          <div class="field">
+            <label for="phone">WhatsApp Telefonnummer<span class="req">*</span></label>
+            <div class="phone-input-group">
+              <div class="country-code">
+                <img src="https://flagcdn.com/w20/de.png" alt="Deutsche Flagge" width="20" height="14" style="display:inline-block;vertical-align:middle;margin-right:8px;border-radius:2px;">
+                +49
+              </div>
+              <input id="phone" name="phone" type="tel" class="phone-input" placeholder="15123456789" required inputmode="tel" pattern="[0-9]*" />
+            </div>
+            <div class="error-message">Bitte geben Sie eine gültige deutsche Telefonnummer ohne Leerzeichen ein.</div>
+          </div>
+
+          <div class="field">
+            <label for="age">Alter<span class="req">*</span></label>
+            <input id="age" name="age" type="number" min="18" max="65" placeholder="z.B. 28" required />
+            <div class="error-message">Bitte geben Sie ein Alter zwischen 18 und 65 Jahren ein.</div>
+          </div>
+
+          <div class="field check">
+            <input id="consent" name="consent" type="checkbox" required style="width: auto; margin-top: 4px;" checked />
+            <label for="consent">Ich akzeptiere die <a href="#privacy">Datenschutzerklärung</a> und die <a href="#terms">Nutzungsbedingungen</a>.</label>
+          </div>
+
+          <button type="submit" class="btn btn-orange btn-block pulse">KOSTENLOS STARTEN!</button>
+          
+          <div class="security-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="#19c37d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 12L11 14L15 10" stroke="#19c37d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Ihre Daten sind sicher und werden niemals an Dritte weitergegeben</span>
+          </div>
+          
+          <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </aside>
+    </div>
+
+    <div class="hero-bg" role="img" aria-label="Remote-Arbeitsszene: Frau benutzt ein Tablet zu Hause"></div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="modal" id="successModal">
+    <div class="modal-content" aria-labelledby="modalTitle" role="dialog" aria-modal="true">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Schließen">&times;</button>
+      <h3 class="modal-title" id="modalTitle">Fantastisch!</h3>
+      <p class="modal-message">Ihre Bewerbung wurde erfolgreich übermittelt! Klicken Sie auf OK, um sofort unseren Kundenservice auf WhatsApp zu kontaktieren und noch heute mit dem Verdienen zu beginnen.</p>
+      <button class="modal-btn" id="modalOkBtn">OK, ICH MÖCHTE STARTEN!</button>
+    </div>
+  </div>
+
+  <!-- Form Modal -->
+  <div class="modal" id="formModal">
+    <div class="modal-content" style="max-width: 500px;" aria-labelledby="modalFormTitle" role="dialog" aria-modal="true">
+      <button class="modal-close" id="formModalCloseBtn" aria-label="Schließen">&times;</button>
+      <div class="urgency-badge">BEGRENZTE PLÄTZE - JETZT BEWERBEN!</div>
+      <h2 class="form-title" id="modalFormTitle">Jetzt bewerben</h2>
+      <p class="form-note">Füllen Sie das Formular aus und wir kontaktieren Sie innerhalb von 10 Minuten auf WhatsApp, um sofort mit der Arbeit zu beginnen!</p>
+      
+      <div class="progress-bar">
+        <div class="progress-step active"></div>
+        <div class="progress-step"></div>
+        <div class="progress-step"></div>
+      </div>
+
+      <form id="modalApplicationForm" novalidate>
+        <div class="field">
+          <label for="modal-name">Vollständiger Name<span class="req">*</span></label>
+          <input id="modal-name" name="name" type="text" placeholder="Ihr vollständiger Name" required autocomplete="name" />
+          <div class="error-message">Bitte geben Sie Ihren vollständigen Namen ein.</div>
+        </div>
+
+        <div class="field">
+          <label for="modal-phone">WhatsApp Telefonnummer<span class="req">*</span></label>
+          <div class="phone-input-group">
+            <div class="country-code">
+              <img src="https://flagcdn.com/w20/de.png" alt="Deutsche Flagge" width="20" height="14" style="display:inline-block;vertical-align:middle;margin-right:8px;border-radius:2px;">
+              +49
+            </div>
+            <input id="modal-phone" name="phone" type="tel" class="phone-input" placeholder="15123456789" required inputmode="tel" pattern="[0-9]*" />
+          </div>
+          <div class="error-message">Bitte geben Sie eine gültige deutsche Telefonnummer ohne Leerzeichen ein.</div>
+        </div>
+
+        <div class="field">
+          <label for="modal-age">Alter<span class="req">*</span></label>
+          <input id="modal-age" name="age" type="number" min="18" max="65" placeholder="z.B. 28" required />
+          <div class="error-message">Bitte geben Sie ein Alter zwischen 18 und 65 Jahren ein.</div>
+        </div>
+
+        <div class="field check">
+          <input id="modal-consent" name="consent" type="checkbox" required style="width: auto; margin-top: 4px;" checked />
+          <label for="modal-consent">Ich akzeptiere die <a href="#privacy">Datenschutzerklärung</a> und die <a href="#terms">Nutzungsbedingungen</a>.</label>
+        </div>
+
+        <button type="submit" class="btn btn-orange btn-block pulse">KOSTENLOS STARTEN!</button>
+        
+        <div class="security-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="#19c37d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 12L11 14L15 10" stroke="#19c37d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Ihre Daten sind sicher und werden niemals an Dritte weitergegeben</span>
+        </div>
+        
+        <p id="modalFormStatus" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hiring (Part-time & Full-time) -->
+  <section id="roles" class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Wählen Sie, Wie Viel Sie Täglich Verdienen Möchten</h2>
+        <p class="muted">Entscheiden Sie selbst, wie viel Zeit Sie investieren und wie viel Sie verdienen möchten. Die Auszahlungen sind täglich und garantiert!</p>
+      </div>
+
+      <div class="cards two-col">
+        <article class="card fade-in">
+          <div class="card-media media-pt"></div>
+          <div class="card-body">
+            <div class="earnings-badge">15-50 € / Tag</div>
+            <h3>Teilzeit Arbeit</h3>
+            <ul class="list">
+              <li><strong>1-3 Stunden täglich</strong> - wann Sie wollen</li>
+              <li><strong>Tägliche Auszahlung</strong> - Geld jeden Abend auf Ihrem Konto</li>
+              <li><strong>Smartphone ausreichend</strong> - kein Computer nötig</li>
+              <li><strong>Einfachste Aufgaben</strong> - keine Vorkenntnisse erforderlich</li>
+              <li><strong>Ideal für Studenten, Mütter, Rentner</strong></li>
+            </ul>
+            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">TEILZEIT STARTEN</a>
+          </div>
+        </article>
+
+        <article class="card fade-in delay-1">
+          <div class="card-media media-ft"></div>
+          <div class="card-body">
+            <div class="earnings-badge">50-120 € / Tag</div>
+            <h3>Vollzeit Arbeit</h3>
+            <ul class="list">
+              <li><strong>3-6 Stunden täglich</strong> - flexible Arbeitszeiten</li>
+              <li><strong>Tägliche Auszahlung</strong> - garantierte Einnahmen</li>
+              <li><strong>Smartphone oder Computer</strong> - wie Sie bevorzugen</li>
+              <li><strong>Einfache aber mehr Aufgaben</strong></li>
+              <li><strong>Ideal für stetiges Einkommen</strong></li>
+            </ul>
+            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">VOLLZEIT STARTEN</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flexible Work Bonus -->
+  <section class="section alt">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Extra-Boni Für Kontinuierliche Arbeit</h2>
+        <p class="muted">Zusätzlich zu Ihren normalen Einnahmen erhalten Sie Extra-Boni für Ihre Kontinuität!</p>
+      </div>
+      
+      <div class="cards three-col">
+        <div class="card bonus fade-in">
+          <div class="bonus-icon" aria-hidden="true">🎁</div>
+          <h3>5 Aktive Tage</h3>
+          <p>10 € Extra-Bonus nach 5 Arbeitstagen diesen Monat.</p>
+        </div>
+        <div class="card bonus fade-in delay-1">
+          <div class="bonus-icon" aria-hidden="true">🏆</div>
+          <h3>15 Aktive Tage</h3>
+          <p>25 € Extra-Bonus nach 15 Arbeitstagen diesen Monat.</p>
+        </div>
+        <div class="card bonus fade-in delay-2">
+          <div class="bonus-icon" aria-hidden="true">⭐</div>
+          <h3>30 Aktive Tage</h3>
+          <p>50 € Extra-Bonus nach 30 Arbeitstagen diesen Monat.</p>
+        </div>
+      </div>
+      <p class="muted" style="text-align: center; margin-top: 20px;">Boni sind für alle aktiven Mitarbeiter garantiert. Keine Überraschungen, nur Extra-Einnahmen!</p>
+    </div>
+  </section>
+
+  <!-- Job Requirements -->
+  <section class="section" aria-labelledby="req-title">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2 id="req-title">Sie Benötigen Nur Dieses, Um Zu Starten</h2>
+        <p class="muted">Einfachste Voraussetzungen, um sofort mit dem Verdienen zu beginnen.</p>
+      </div>
+      
+      <div class="requirements">
+        <div class="req-item fade-in">
+          <div class="req-icon">📱</div>
+          <div>
+            <h4>Ein Smartphone</h4>
+            <p>Android oder iPhone mit Internetverbindung.</p>
+          </div>
+        </div>
+        <div class="req-item fade-in delay-1">
+          <div class="req-icon">💸</div>
+          <div>
+            <h4>Lust Zu Verdienen</h4>
+            <p>Keine Erfahrung, nur Motivation.</p>
+          </div>
+        </div>
+        <div class="req-item fade-in delay-1">
+          <div class="req-icon">🎯</div>
+          <div>
+            <h4>Alter 18+</h4>
+            <p>Ab 18 Jahren, keine Altersgrenze nach oben.</p>
+          </div>
+        </div>
+        <div class="req-item fade-in delay-2">
+          <div class="req-icon">🤝</div>
+          <div>
+            <h4>Alle Willkommen</h4>
+            <p>Frauen, Männer, Studenten, Rentner.</p>
+          </div>
+        </div>
+        <div class="req-item fade-in delay-2">
+          <div class="req-icon">⚡</div>
+          <div>
+            <h4>10 Minuten Pro Tag</h4>
+            <p>Wenige Minuten reichen zum Lernen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work From Home Benefits -->
+  <section id="benefits" class="section alt">
+    <div class="container">
+      <div class="benefits-grid">
+        <div class="benefits-media fade-in"></div>
+        <div class="benefits-copy fade-in delay-1">
+          <h2>Arbeiten Sie Wirklich Stressfrei Von Zuhause</h2>
+          <ul class="stats">
+            <li><strong>50.000+</strong> Deutsche arbeiten bereits mit uns</li>
+            <li><strong>100.000+</strong> Aufgaben monatlich erledigt</li>
+            <li><strong>500+</strong> Personen im Support-Team</li>
+            <li><strong>98%</strong> Zufriedenheit der Mitarbeiter</li>
+          </ul>
+          <p class="muted">Werden Sie Teil einer Gemeinschaft normaler Menschen, die täglich verdienen, ohne das Haus zu verlassen!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Was Unsere Mitarbeiter Sagen</h2>
+        <p class="muted">Echte Menschen, echte Einnahmen, wahre Geschichten.</p>
+      </div>
+      
+      <div class="cards three-col">
+        <blockquote class="testimonial fade-in">
+          <div class="avatar">A</div>
+          <p>"Morgens erledige ich die Aufgaben beim Kaffee. Abends ist das Geld schon auf dem Konto. Endlich ein Job ohne Stress!"</p>
+          <footer>— Anna, 32 Jahre, Berlin</footer>
+        </blockquote>
+        <blockquote class="testimonial fade-in delay-1">
+          <div class="avatar">T</div>
+          <p>"Ich arbeite nach meinem Hauptjob. Verdiene 300 € extra im Monat ohne Mühe. Wird Ihr Leben verändern!"</p>
+          <footer>— Thomas, 45 Jahre, München</footer>
+        </blockquote>
+        <blockquote class="testimonial fade-in delay-2">
+          <div class="avatar">H</div>
+          <p>"Als Rentnerin bezahle ich mir damit Extras. Es ist einfach und hält mich geistig aktiv."</p>
+          <footer>— Helga, 68 Jahre, Hamburg</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- Limited Opportunity -->
+  <section class="section cta">
+    <div class="container cta-inner fade-in">
+      <div>
+        <span class="urgency-badge">LETZTE CHANCE - PLÄTZE FAST VERGEBEN</span>
+        <h2>Plätze Sind Begrenzt - Bewerben Sie Sich Jetzt!</h2>
+        <p class="muted">Wir erhalten täglich hunderte Bewerbungen, können aber nur wenige neue Mitarbeiter aufnehmen. Senden Sie Ihre Bewerbung jetzt, bevor die Plätze vergeben sind!</p>
+        
+        <div class="countdown">
+          <div class="countdown-item">
+            <div class="countdown-number" id="countdown-hours">12</div>
+            <div class="countdown-label">Stunden</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="countdown-minutes">45</div>
+            <div class="countdown-label">Minuten</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-number" id="countdown-seconds">30</div>
+            <div class="countdown-label">Sekunden</div>
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-orange btn-lg pulse open-form-btn" href="#">JETZT BEWERBEN - PLÄTZE BEGRENZT!</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section alt">
+    <div class="container">
+      <div class="section-header fade-in">
+        <h2>Häufig Gestellte Fragen</h2>
+        <p class="muted">Alles, was Sie wissen müssen, um sofort zu starten.</p>
+      </div>
+      
+      <details class="faq fade-in">
+        <summary>Was kostet die Bewerbung?</summary>
+        <div>Absolut nichts! Wir verlangen niemals Geld für Ihre Bewerbung oder Anmeldung. Die Plattform ist komplett kostenlos.</div>
+      </details>
+      <details class="faq fade-in">
+        <summary>Wann erhalte ich die Zahlungen?</summary>
+        <div>Zahlungen werden täglich auf Ihr Bankkonto oder PayPal ausgezahlt. Sie erhalten das Geld innerhalb von 24 Stunden nach Aufgabenerfüllung.</div>
+      </details>
+      <details class="faq fade-in">
+        <summary>Benötige ich Erfahrung?</summary>
+        <div>Nein, absolut nicht! Wir bringen Ihnen alles in 10 Minuten bei. Die Aufgaben sind einfach und für jeden von 18 bis 80 Jahren geeignet.</div>
+      </details>
+      <details class="faq fade-in">
+        <summary>Wie viel Zeit muss ich investieren?</summary>
+        <div>Das entscheiden Sie! Sie können von 1 Stunde täglich bis zu 6 Stunden arbeiten. Mehr Zeit bedeutet mehr Einnahmen. Alles flexibel.</div>
+      </details>
+      <details class="faq fade-in">
+        <summary>Wie werdet ihr mich kontaktieren?</summary>
+        <div>Wir kontaktieren Sie innerhalb von 10 Minuten nach Ihrer Bewerbung auf WhatsApp. Sie erhalten sofort Anleitungen zum Start.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top">RemoteArbeit</a>
+        <p class="muted small">Echte Chancen. Tägliche Einnahmen. Keine versteckten Kosten.</p>
+      </div>
+      <nav class="footer-links">
+        <a id="privacy" href="privacy.html" rel="nofollow">Datenschutzerklärung</a>
+        <a id="terms" href="userterms.html" rel="nofollow">Nutzungsbedingungen</a>
+      </nav>
+    </div>
+    <div class="container">
+      <p class="muted small">© 2024 RemoteArbeit. Alle Rechte vorbehalten. Die angezeigten Einnahmen sind Beispiele basierend auf den Erfahrungen unserer Mitarbeiter. Ihre tatsächlichen Einnahmen hängen von der investierten Zeit ab.</p>
+    </div>
+  </footer>
+
+  <!-- Google Analytics Code moved to body for better compatibility -->
+  <script>
+    // Load Google Analytics asynchronously
+    (function() {
+        var gtagScript = document.createElement('script');
+        gtagScript.async = true;
+        gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17420620875';
+        
+        gtagScript.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17420620875');
+            window.gaLoaded = true;
+        };
+        
+        gtagScript.onerror = function() {
+            console.log('GTag script failed to load');
+            window.gaLoaded = false;
+        };
+        
+        document.head.appendChild(gtagScript);
+    })();
+
+    // Enhanced GA conversion reporting with fallbacks
+    function reportGAConversion() {
+        // Try standard gtag first
+        if (window.gaLoaded && typeof gtag === 'function') {
+            try {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-17420620875/jX15CM2_jp8bEMuo5vJA',
+                    'value': 1.0,
+                    'currency': 'EUR',
+                    'transaction_id': ''
+                });
+                console.log('GA conversion sent via gtag');
+                return true;
+            } catch (e) {
+                console.log('GTag conversion failed, trying fallback');
+            }
+        }
+        
+        // Fallback: Image pixel (official Google fallback)
+        try {
+            var fallbackPixel = new Image();
+            fallbackPixel.src = 'https://www.googleadservices.com/pagead/conversion/17420620875/?label=jX15CM2_jp8bEMuo5vJA&guid=ON&script=0';
+            console.log('GA conversion sent via image pixel');
+            return true;
+        } catch (e) {
+            console.log('Image pixel failed, storing for later');
+        }
+        
+        // Final fallback: Store conversion for later retry
+        try {
+            var pendingConversions = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
+            pendingConversions.push({
+                timestamp: new Date().toISOString(),
+                label: 'jX15CM2_jp8bEMuo5vJA'
+            });
+            localStorage.setItem('ga_pending_conversions', JSON.stringify(pendingConversions));
+            console.log('GA conversion stored locally');
+        } catch (storageError) {
+            console.error('Failed to store conversion locally', storageError);
+        }
+        
+        return false;
+    }
+
+    // Store pending conversions for later retry
+    function storePendingConversion() {
+        try {
+            var pending = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
+            pending.push({
+                timestamp: new Date().toISOString(),
+                label: 'jX15CM2_jp8bEMuo5vJA'
+            });
+            localStorage.setItem('ga_pending_conversions', JSON.stringify(pending));
+        } catch (e) {
+            console.error('Failed to store pending conversion');
+        }
+    }
+
+    // Retry pending conversions when GA loads
+    function retryPendingConversions() {
+        try {
+            var pending = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
+            if (pending.length > 0 && window.gaLoaded && typeof gtag === 'function') {
+                pending.forEach(function(conversion) {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-17420620875/' + conversion.label,
+                        'value': 1.0,
+                        'currency': 'EUR'
+                    });
+                });
+                localStorage.removeItem('ga_pending_conversions');
+                console.log('Retried ' + pending.length + ' pending conversions');
+            }
+        } catch (e) {
+            console.error('Failed to retry pending conversions');
+        }
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('applicationForm');
+      const modalForm = document.getElementById('modalApplicationForm');
+      const formStatus = document.getElementById('formStatus');
+      const modalFormStatus = document.getElementById('modalFormStatus');
+      const successModal = document.getElementById('successModal');
+      const formModal = document.getElementById('formModal');
+      const modalOkBtn = document.getElementById('modalOkBtn');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const formModalCloseBtn = document.getElementById('formModalCloseBtn');
+      const openFormBtn = document.getElementById('openFormBtn');
+      const openFormBtns = document.querySelectorAll('.open-form-btn');
+      
+      // WhatsApp account array (nur Nummern)
+      const whatsappAccounts = [
+        "4915167890123",
+        "4915178901234", 
+        "4915189012345",
+        "4915190123456",
+        "4915201234567",
+        "4915212345678",
+        "4915223456789",
+        "4915234567890",
+        "4915245678901",
+        "4915256789012"
+      ];
+      
+      // Funktion für WhatsApp-Link-Generierung
+      function generateWhatsAppLink(phoneNumber) {
+        const message = encodeURIComponent("Hallo, ich interessiere mich für den Online-Teilzeitjob mit hohem Einkommen!");
+        return `https://wa.me/${phoneNumber}?text=${message}`;
+      }
+      
+      // Zufälligen Account zuweisen und Link generieren
+      const randomAccount = whatsappAccounts[Math.floor(Math.random() * whatsappAccounts.length)];
+      const assignedWhatsAppLink = generateWhatsAppLink(randomAccount);
+      
+      // Formularvalidierungsfunktionen
+      function validateGermanPhone(phone) {
+        return /^[0-9]+$/.test(phone) && phone.length >= 10 && phone.length <= 15;
+      }
+      
+      function validateAge(age) {
+        const ageNum = parseInt(age);
+        return !isNaN(ageNum) && ageNum >= 18 && ageNum <= 65;
+      }
+      
+      function validateName(name) {
+        return name.trim().length >= 2;
+      }
+      
+      // Echtzeit-Validierung hinzufügen
+      function addRealTimeValidation() {
+        // Telefonnummer-Validierung
+        const phoneInputs = document.querySelectorAll('input[name="phone"]');
+        phoneInputs.forEach(input => {
+          input.addEventListener('input', function() {
+            if (this.value && !validateGermanPhone(this.value)) {
+              this.classList.add('invalid');
+            } else {
+              this.classList.remove('invalid');
+            }
+          });
+        });
+        
+        // Alter-Validierung
+        const ageInputs = document.querySelectorAll('input[name="age"]');
+        ageInputs.forEach(input => {
+          input.addEventListener('input', function() {
+            if (this.value && !validateAge(this.value)) {
+              this.classList.add('invalid');
+            } else {
+              this.classList.remove('invalid');
+            }
+          });
+        });
+        
+        // Name-Validierung
+        const nameInputs = document.querySelectorAll('input[name="name"]');
+        nameInputs.forEach(input => {
+          input.addEventListener('input', function() {
+            if (this.value && !validateName(this.value)) {
+              this.classList.add('invalid');
+            } else {
+              this.classList.remove('invalid');
+            }
+          });
+        });
+      }
+      
+      // Modale Formular öffnen
+      function openFormModal() {
+        formModal.classList.add('active');
+      }
+      
+      // Modale Formular schließen
+      function closeFormModal() {
+        formModal.classList.remove('active');
+      }
+      
+      // Erfolgsmodale öffnen
+      function openSuccessModal() {
+        successModal.classList.add('active');
+      }
+      
+      // Erfolgsmodale schließen
+      function closeSuccessModal() {
+        successModal.classList.remove('active');
+      }
+      
+      // Formularübermittlung und Validierung behandeln
+      function handleFormSubmit(e, formElement, statusElement) {
+        e.preventDefault();
+        
+        // Vorherige Fehlerstatus bereinigen
+        const inputs = formElement.querySelectorAll('input');
+        inputs.forEach(input => {
+          input.classList.remove('invalid');
+        });
+        
+        const errorMessages = formElement.querySelectorAll('.error-message');
+        errorMessages.forEach(msg => {
+          msg.style.display = 'none';
+        });
+        
+        let isValid = true;
+        
+        // Name validieren
+        const nameInput = formElement.querySelector('input[name="name"]');
+        if (!validateName(nameInput.value)) {
+          isValid = false;
+          nameInput.classList.add('invalid');
+          nameInput.nextElementSibling.style.display = 'block';
+        }
+        
+        // Telefonnummer validieren
+        const phoneInput = formElement.querySelector('input[name="phone"]');
+        if (!validateGermanPhone(phoneInput.value)) {
+          isValid = false;
+          phoneInput.classList.add('invalid');
+          phoneInput.parentElement.nextElementSibling.style.display = 'block';
+        }
+        
+        // Alter validieren
+        const ageInput = formElement.querySelector('input[name="age"]');
+        if (!validateAge(ageInput.value)) {
+          isValid = false;
+          ageInput.classList.add('invalid');
+          ageInput.nextElementSibling.style.display = 'block';
+        }
+        
+        // Zustimmung zu den Bedingungen validieren
+        const consentInput = formElement.querySelector('input[name="consent"]');
+        if (!consentInput.checked) {
+          isValid = false;
+          formElement.querySelector('.field.check label').style.color = '#ff8b8b';
+        } else {
+          formElement.querySelector('.field.check label').style.color = '';
+        }
+        
+        if (!isValid) {
+          statusElement.textContent = 'Bitte füllen Sie alle Pflichtfelder korrekt aus.';
+          statusElement.className = 'form-status error';
+          return;
+        }
+        
+        // Formular validiert - GA-Konversion melden (nicht blockierend)
+        setTimeout(() => {
+          reportGAConversion();
+        }, 100);
+        
+        // WhatsApp in neuem Tab öffnen (nicht blockierend)
+        setTimeout(() => {
+          window.open(assignedWhatsAppLink, '_blank');
+        }, 150);
+        
+        // Erfolgsmeldung anzeigen
+        openSuccessModal();
+        
+        // Wenn es sich um das modale Formular handelt, schließen
+        if (formElement === modalForm) {
+          closeFormModal();
+        }
+      }
+      
+      // Event-Listener
+      form.addEventListener('submit', function(e) {
+        handleFormSubmit(e, form, formStatus);
+      });
+      
+      modalForm.addEventListener('submit', function(e) {
+        handleFormSubmit(e, modalForm, modalFormStatus);
+      });
+      
+      openFormBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openFormModal();
+      });
+      
+      openFormBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          openFormModal();
+        });
+      });
+      
+      // Modale Schließen-Buttons
+      modalCloseBtn.addEventListener('click', closeSuccessModal);
+      formModalCloseBtn.addEventListener('click', closeFormModal);
+      
+      // Modale durch Klicken auf den Hintergrund schließen
+      successModal.addEventListener('click', function(e) {
+        if (e.target === successModal) {
+          closeSuccessModal();
+        }
+      });
+      
+      formModal.addEventListener('click', function(e) {
+        if (e.target === formModal) {
+          closeFormModal();
+        }
+      });
+      
+      // OK-Button im Erfolgsmodale - sofort zu WhatsApp weiterleiten
+      modalOkBtn.addEventListener('click', function() {
+        window.open(assignedWhatsAppLink, '_blank');
+      });
+      
+      // Sanftes Scrollen hinzufügen
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        if (anchor.getAttribute('href') !== '#' && 
+            !anchor.classList.contains('open-form-btn') && 
+            anchor.id !== 'openFormBtn') {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          });
+        }
+      });
+      
+      // Echtzeit-Validierung aktivieren
+      addRealTimeValidation();
+      
+      // Fade-In-Animationen hinzufügen
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Countdown-Timer
+      function updateCountdown() {
+        const now = new Date();
+        const hours = 23 - now.getHours();
+        const minutes = 59 - now.getMinutes();
+        const seconds = 59 - now.getSeconds();
+        
+        document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
+      }
+      
+      // Countdown initialisieren und aktualisieren
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+      
+      // Ausstehende Konversionen erneut versuchen, wenn GA geladen ist
+      window.addEventListener('load', function() {
+        setTimeout(retryPendingConversions, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
