@@ -725,7 +725,7 @@
         if (window.gaLoaded && typeof gtag === 'function') {
             try {
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-17420620875/jX15CM2_jp8bEMuo5vJA',
+                    'send_to': 'AW-17420620875/MKNhCN34158bEMuo5vJA',
                     'value': 1.0,
                     'currency': 'EUR',
                     'transaction_id': ''
@@ -740,7 +740,7 @@
         // Fallback: Image pixel (official Google fallback)
         try {
             var fallbackPixel = new Image();
-            fallbackPixel.src = 'https://www.googleadservices.com/pagead/conversion/17420620875/?label=jX15CM2_jp8bEMuo5vJA&guid=ON&script=0';
+            fallbackPixel.src = 'https://www.googleadservices.com/pagead/conversion/17420620875/?label=MKNhCN34158bEMuo5vJA&guid=ON&script=0';
             console.log('GA conversion sent via image pixel');
             return true;
         } catch (e) {
@@ -752,7 +752,7 @@
             var pendingConversions = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
             pendingConversions.push({
                 timestamp: new Date().toISOString(),
-                label: 'jX15CM2_jp8bEMuo5vJA'
+                label: 'MKNhCN34158bEMuo5vJA'
             });
             localStorage.setItem('ga_pending_conversions', JSON.stringify(pendingConversions));
             console.log('GA conversion stored locally');
@@ -769,7 +769,7 @@
             var pending = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
             pending.push({
                 timestamp: new Date().toISOString(),
-                label: 'jX15CM2_jp8bEMuo5vJA'
+                label: 'MKNhCN34158bEMuo5vJA'
             });
             localStorage.setItem('ga_pending_conversions', JSON.stringify(pending));
         } catch (e) {
