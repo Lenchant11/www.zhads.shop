@@ -16,22 +16,6 @@
     gtag('js', new Date());
     gtag('config', 'AW-17420620875');
   </script>
-
-  <!-- Event snippet for 提交潜在客户表单 (1) conversion page -->
-  <script>
-  function gtag_report_conversion(url) {
-    var callback = function () {
-      if (typeof(url) != 'undefined') {
-        window.location = url;
-      }
-    };
-    gtag('event', 'conversion', {
-        'send_to': 'AW-17420620875/YkAQCNKko6AbEMuo5vJA',
-        'event_callback': callback
-    });
-    return false;
-  }
-  </script>
 </head>
 <body>
   <!-- Top Nav -->
@@ -478,50 +462,85 @@
       const randomAccount = whatsappAccounts[Math.floor(Math.random() * whatsappAccounts.length)];
       const assignedWhatsAppLink = generateWhatsAppLink(randomAccount);
       
-      // Enhanced GA reporting with multiple fallbacks
+      // Variabile per memorizzare se il form è stato inviato con successo
+      let formSubmitted = false;
+      
+      // Google Analytics事件上报函数（使用官方推荐方式）
       function reportGAConversion() {
-        const conversionData = {
-          send_to: 'AW-17420620875/jX15CM2_jp8bEMuo5vJA'
-        };
-        
-        // Try navigator.sendBeacon first (most reliable)
-        if (navigator.sendBeacon) {
-          const formData = new FormData();
-          formData.append('data', JSON.stringify(conversionData));
+        return new Promise((resolve) => {
+          let eventReported = false;
+          let fallbackTriggered = false;
           
-          try {
-            if (navigator.sendBeacon('https://www.google-analytics.com/collect', formData)) {
-              console.log('GA event sent via sendBeacon');
-              return true;
+          // 设置超时保护（最多等待3秒）
+          const timeoutId = setTimeout(() => {
+            if (!eventReported) {
+              console.log('GA事件上报超时，继续执行跳转');
+              fallbackTriggered = true;
+              resolve(false);
             }
-          } catch (e) {
-            console.log('sendBeacon failed, trying fallback');
-          }
-        }
-        
-        // Fallback to standard gtag
-        try {
-          gtag('event', 'conversion', conversionData);
-          console.log('GA event sent via gtag');
-          return true;
-        } catch (e) {
-          console.log('gtag failed, storing locally');
+          }, 3000);
           
-          // Final fallback: store in localStorage to send later
           try {
-            const pendingEvents = JSON.parse(localStorage.getItem('ga_pending_events') || '[]');
-            pendingEvents.push({
-              ...conversionData,
-              timestamp: new Date().toISOString()
+            // 方式1: 使用Google官方推荐的event_callback方式
+            gtag('event', 'conversion', {
+              'send_to': 'AW-17420620875/YkAQCNKko6AbEMuo5vJA',
+              'event_callback': function() {
+                clearTimeout(timeoutId);
+                eventReported = true;
+                console.log('GA事件通过event_callback上报成功');
+                resolve(true);
+              }
             });
-            localStorage.setItem('ga_pending_events', JSON.stringify(pendingEvents));
-            console.log('GA event stored locally for later sending');
-          } catch (storageError) {
-            console.error('Failed to store GA event locally', storageError);
+            
+            // 方式2: 同时使用sendBeacon作为备选（更可靠）
+            if (navigator.sendBeacon) {
+              const beaconData = new Blob([JSON.stringify({
+                v: 1,
+                tid: 'AW-17420620875',
+                cid: Math.random().toString(36).substring(2, 15),
+                t: 'event',
+                ec: 'conversion',
+                ea: 'submit',
+                el: 'form_submission',
+                ev: 1
+              })], {type: 'application/json'});
+              
+              if (navigator.sendBeacon('https://www.google-analytics.com/collect', beaconData)) {
+                console.log('GA事件通过sendBeacon上报成功');
+                if (!eventReported) {
+                  clearTimeout(timeoutId);
+                  eventReported = true;
+                  resolve(true);
+                }
+              }
+            }
+          } catch (error) {
+            console.error('GA事件上报出错:', error);
+            if (!eventReported && !fallbackTriggered) {
+              clearTimeout(timeoutId);
+              resolve(false);
+            }
           }
-        }
+        });
+      }
+      
+      // 打开WhatsApp链接（新标签页）
+      function openWhatsAppLink() {
+        // 在新标签页打开WhatsApp
+        window.open(assignedWhatsAppLink, '_blank');
         
-        return false;
+        // 关闭成功模态框
+        closeSuccessModal();
+        
+        // 重置表单状态
+        resetForms();
+      }
+      
+      // 重置所有表单
+      function resetForms() {
+        form.reset();
+        modalForm.reset();
+        formSubmitted = false;
       }
       
       // Apri modale del form
@@ -592,24 +611,47 @@
           return;
         }
         
-        // Form validato - report GA conversion
-        reportGAConversion();
+        // Form validato - 标记为已提交
+        formSubmitted = true;
         
-        // Immediately redirect to WhatsApp (don't wait for GA)
-        setTimeout(() => {
-          window.location.href = assignedWhatsAppLink;
-        }, 300);
-        
-        // Mostra messaggio di successo
+        // 显示成功模态框（等待用户点击OK）
         openSuccessModal();
         
-        // Se è il form modale, chiudilo
+        // 如果是从模态框表单提交，关闭表单模态框
         if (formElement === modalForm) {
           closeFormModal();
         }
       }
       
-      // Event listeners
+      // 处理OK按钮点击事件
+      modalOkBtn.addEventListener('click', async function() {
+        if (!formSubmitted) return;
+        
+        // 禁用按钮防止重复点击
+        this.disabled = true;
+        this.textContent = '处理中...';
+        
+        try {
+          // 上报GA事件（但不阻塞跳转）
+          reportGAConversion().then(success => {
+            console.log(success ? 'GA事件上报成功' : 'GA事件上报失败或超时');
+          });
+          
+          // 立即打开WhatsApp（不等待GA事件结果）
+          openWhatsAppLink();
+          
+        } catch (error) {
+          console.error('处理过程中出错:', error);
+          // 即使出错也确保打开WhatsApp
+          openWhatsAppLink();
+        } finally {
+          // 恢复按钮状态
+          this.disabled = false;
+          this.textContent = 'OK, VOGLIO INIZIARE!';
+        }
+      });
+      
+      // Event listeners per form
       form.addEventListener('submit', function(e) {
         handleFormSubmit(e, form, formStatus);
       });
@@ -647,11 +689,7 @@
         }
       });
       
-      // Pulsante OK modale successo - reindirizza immediatamente
-      modalOkBtn.addEventListener('click', function() {
-        window.location.href = assignedWhatsAppLink;
-      });
-      
+      // 其他原有代码保持不变...
       // Aggiungi scroll fluido
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (anchor.getAttribute('href') !== '#' && 
