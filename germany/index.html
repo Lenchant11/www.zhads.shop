@@ -44,6 +44,7 @@
     .btn-orange{background:var(--orange);color:#0b0f14; box-shadow: 0 4px 10px rgba(255, 122, 26, 0.25);}
     .btn-orange:hover{background:var(--orange-600); transform: translateY(-2px); box-shadow: 0 6px 14px rgba(255, 122, 26, 0.35);}
     .btn:focus{outline:none;box-shadow:var(--ring)}
+    .btn:disabled{opacity:0.7;cursor:not-allowed;transform:none !important;}
     
     .hero{position:relative;padding:30px 0 30px; overflow: hidden;}
     .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:stretch}
@@ -111,6 +112,11 @@
     /* Close button for modal */
     .modal-close { position: absolute; top: 10px; right: 12px; background: transparent; border: none; font-size: 22px; color: var(--muted); cursor: pointer; }
     .modal-close:hover { color: var(--text); }
+
+    /* Fallback message styles */
+    .fallback-message {background: rgba(25, 195, 125, 0.1); border: 1px solid rgba(25, 195, 125, 0.2); border-radius: 8px; padding: 16px; margin-top: 16px; text-align: center;}
+    .fallback-message p {margin: 0 0 12px 0; color: var(--green); font-weight: 500;}
+    .fallback-link {display: inline-block; margin-top: 8px;}
 
     .section{padding:60px 0}
     .section.alt{background:#0b1220}
@@ -364,7 +370,7 @@
             <label for="consent">Ich akzeptiere die <a href="#privacy">Datenschutzerklärung</a> und die <a href="#terms">Nutzungsbedingungen</a>.</label>
           </div>
 
-          <button type="submit" class="btn btn-orange btn-block pulse">KOSTENLOS STARTEN!</button>
+          <button type="submit" class="btn btn-orange btn-block pulse" id="submitBtn">KOSTENLOS STARTEN!</button>
           
           <div class="security-badge">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -436,7 +442,7 @@
           <label for="modal-consent">Ich akzeptiere die <a href="#privacy">Datenschutzerklärung</a> und die <a href="#terms">Nutzungsbedingungen</a>.</label>
         </div>
 
-        <button type="submit" class="btn btn-orange btn-block pulse">KOSTENLOS STARTEN!</button>
+        <button type="submit" class="btn btn-orange btn-block pulse" id="modalSubmitBtn">KOSTENLOS STARTEN!</button>
         
         <div class="security-badge">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -694,7 +700,6 @@
     </div>
   </footer>
 
-  <!-- Google Analytics Code moved to body for better compatibility -->
   <script>
     // Load Google Analytics asynchronously
     (function() {
@@ -708,6 +713,9 @@
             gtag('js', new Date());
             gtag('config', 'AW-17420620875');
             window.gaLoaded = true;
+            
+            // GA加载后重试待处理的转化事件
+            retryPendingConversions();
         };
         
         gtagScript.onerror = function() {
@@ -718,9 +726,42 @@
         document.head.appendChild(gtagScript);
     })();
 
-    // Enhanced GA conversion reporting with fallbacks
+    // 增强的GA转化上报函数 - 使用谷歌推荐的多重保障
     function reportGAConversion() {
-        // Try standard gtag first
+        let conversionReported = false;
+        
+        // 方法1: Beacon API (最高优先级，谷歌推荐用于转化跟踪)
+        if (navigator.sendBeacon) {
+            try {
+                const beaconData = new FormData();
+                beaconData.append('label', 'MKNhCN34158bEMuo5vJA');
+                beaconData.append('script', '0');
+                beaconData.append('guid', 'ON');
+                
+                if (navigator.sendBeacon('https://www.googleadservices.com/pagead/conversion/17420620875/', beaconData)) {
+                    console.log('GA conversion sent via Beacon API');
+                    conversionReported = true;
+                }
+            } catch (e) {
+                console.log('Beacon API failed, trying fallback');
+            }
+        }
+        
+        // 方法2: 同步Image像素 (谷歌官方推荐的fallback方案)
+        if (!conversionReported) {
+            try {
+                const pixel = new Image();
+                pixel.src = 'https://www.googleadservices.com/pagead/conversion/17420620875/?label=MKNhCN34158bEMuo5vJA&guid=ON&script=0';
+                pixel.onload = function() {
+                    console.log('GA conversion sent via image pixel');
+                };
+                conversionReported = true;
+            } catch (e) {
+                console.log('Image pixel failed');
+            }
+        }
+        
+        // 方法3: 标准gtag上报 (异步备份)
         if (window.gaLoaded && typeof gtag === 'function') {
             try {
                 gtag('event', 'conversion', {
@@ -728,64 +769,62 @@
                     'transaction_id': ''
                 });
                 console.log('GA conversion sent via gtag');
-                return true;
+                conversionReported = true;
             } catch (e) {
-                console.log('GTag conversion failed, trying fallback');
+                console.log('GTag conversion failed');
             }
         }
         
-        // Fallback: Image pixel (official Google fallback)
-        try {
-            var fallbackPixel = new Image();
-            fallbackPixel.src = 'https://www.googleadservices.com/pagead/conversion/17420620875/?label=MKNhCN34158bEMuo5vJA&guid=ON&script=0';
-            console.log('GA conversion sent via image pixel');
-            return true;
-        } catch (e) {
-            console.log('Image pixel failed, storing for later');
+        // 方法4: localStorage存储 (最终fallback)
+        if (!conversionReported) {
+            storePendingConversion();
+            console.log('GA conversion stored locally for retry');
         }
         
-        // Final fallback: Store conversion for later retry
-        try {
-            var pendingConversions = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
-            pendingConversions.push({
-                timestamp: new Date().toISOString(),
-                label: 'MKNhCN34158bEMuo5vJA'
-            });
-            localStorage.setItem('ga_pending_conversions', JSON.stringify(pendingConversions));
-            console.log('GA conversion stored locally');
-        } catch (storageError) {
-            console.error('Failed to store conversion locally', storageError);
-        }
-        
-        return false;
+        return conversionReported;
     }
 
-    // Store pending conversions for later retry
+    // 存储待处理的转化事件
     function storePendingConversion() {
         try {
             var pending = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
             pending.push({
                 timestamp: new Date().toISOString(),
-                label: 'MKNhCN34158bEMuo5vJA'
+                label: 'MKNhCN34158bEMuo5vJA',
+                type: 'conversion'
             });
+            // 只保留最近10个待处理事件
+            if (pending.length > 10) {
+                pending = pending.slice(-10);
+            }
             localStorage.setItem('ga_pending_conversions', JSON.stringify(pending));
         } catch (e) {
             console.error('Failed to store pending conversion');
         }
     }
 
-    // Retry pending conversions when GA loads
+    // 重试待处理的转化事件
     function retryPendingConversions() {
         try {
             var pending = JSON.parse(localStorage.getItem('ga_pending_conversions') || '[]');
             if (pending.length > 0 && window.gaLoaded && typeof gtag === 'function') {
+                var successfulRetries = 0;
+                
                 pending.forEach(function(conversion) {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-17420620875/' + conversion.label,
-                    });
+                    try {
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-17420620875/' + conversion.label,
+                            'transaction_id': ''
+                        });
+                        successfulRetries++;
+                    } catch (e) {
+                        console.log('Failed to retry conversion:', conversion);
+                    }
                 });
+                
+                // 清空已重试的事件
                 localStorage.removeItem('ga_pending_conversions');
-                console.log('Retried ' + pending.length + ' pending conversions');
+                console.log('Successfully retried ' + successfulRetries + ' pending conversions');
             }
         } catch (e) {
             console.error('Failed to retry pending conversions');
@@ -806,6 +845,8 @@
       const formModalCloseBtn = document.getElementById('formModalCloseBtn');
       const openFormBtn = document.getElementById('openFormBtn');
       const openFormBtns = document.querySelectorAll('.open-form-btn');
+      const submitBtn = document.getElementById('submitBtn');
+      const modalSubmitBtn = document.getElementById('modalSubmitBtn');
       
       // WhatsApp account array (nur Nummern)
       const whatsappAccounts = [
@@ -895,11 +936,31 @@
         successModal.classList.remove('active');
       }
       
-      // Formularübermittlung und Validierung behandeln
-      function handleFormSubmit(e, formElement, statusElement) {
+      // 显示备选消息
+      function showFallbackMessage(container, whatsappLink) {
+        const fallbackHTML = `
+          <div class="fallback-message">
+            <p>✅ Formular erfolgreich übermittelt! Wenn WhatsApp nicht automatisch geöffnet wurde:</p>
+            <a href="${whatsappLink}" target="_blank" class="btn btn-orange fallback-link">
+              📱 Hier klicken um WhatsApp manuell zu öffnen
+            </a>
+          </div>
+        `;
+        container.innerHTML = fallbackHTML;
+      }
+      
+      // 优化的表单提交处理
+      function handleFormSubmit(e, formElement, statusElement, submitButton) {
         e.preventDefault();
         
-        // Vorherige Fehlerstatus bereinigen
+        // 防止重复提交
+        if (submitButton.disabled) return;
+        
+        // 禁用提交按钮
+        submitButton.disabled = true;
+        submitButton.textContent = 'Wird übermittelt...';
+        
+        // 清除之前的错误状态
         const inputs = formElement.querySelectorAll('input');
         inputs.forEach(input => {
           input.classList.remove('invalid');
@@ -912,7 +973,7 @@
         
         let isValid = true;
         
-        // Name validieren
+        // 验证姓名
         const nameInput = formElement.querySelector('input[name="name"]');
         if (!validateName(nameInput.value)) {
           isValid = false;
@@ -920,7 +981,7 @@
           nameInput.nextElementSibling.style.display = 'block';
         }
         
-        // Telefonnummer validieren
+        // 验证电话号码
         const phoneInput = formElement.querySelector('input[name="phone"]');
         if (!validateGermanPhone(phoneInput.value)) {
           isValid = false;
@@ -928,7 +989,7 @@
           phoneInput.parentElement.nextElementSibling.style.display = 'block';
         }
         
-        // Alter validieren
+        // 验证年龄
         const ageInput = formElement.querySelector('input[name="age"]');
         if (!validateAge(ageInput.value)) {
           isValid = false;
@@ -936,7 +997,7 @@
           ageInput.nextElementSibling.style.display = 'block';
         }
         
-        // Zustimmung zu den Bedingungen validieren
+        // 验证同意条款
         const consentInput = formElement.querySelector('input[name="consent"]');
         if (!consentInput.checked) {
           isValid = false;
@@ -948,35 +1009,58 @@
         if (!isValid) {
           statusElement.textContent = 'Bitte füllen Sie alle Pflichtfelder korrekt aus.';
           statusElement.className = 'form-status error';
+          
+          // 重新启用按钮
+          submitButton.disabled = false;
+          submitButton.textContent = 'KOSTENLOS STARTEN!';
           return;
         }
         
-        // Formular validiert - GA-Konversion melden (nicht blockierend)
+        // 表单验证通过 - 优先上报GA转化事件
+        const conversionReported = reportGAConversion();
+        console.log('GA conversion reported:', conversionReported);
+        
+        // 短暂延迟确保上报请求发出
         setTimeout(() => {
-          reportGAConversion();
-        }, 100);
-        
-        // WhatsApp in neuem Tab öffnen (nicht blockierend)
-        setTimeout(() => {
-          window.open(assignedWhatsAppLink, '_blank');
-        }, 150);
-        
-        // Erfolgsmeldung anzeigen
-        openSuccessModal();
-        
-        // Wenn es sich um das modale Formular handelt, schließen
-        if (formElement === modalForm) {
-          closeFormModal();
-        }
+          // 在新标签页打开WhatsApp（基于用户点击，不会被拦截）
+          const whatsappWindow = window.open(assignedWhatsAppLink, '_blank');
+          
+          // 检查是否被阻止（极低概率）
+          setTimeout(() => {
+            if (!whatsappWindow || whatsappWindow.closed || typeof whatsappWindow.closed === 'undefined') {
+              // 显示备选方案
+              showFallbackMessage(statusElement, assignedWhatsAppLink);
+            }
+          }, 500);
+          
+          // 显示成功消息
+          statusElement.textContent = '✅ Erfolg! Ihr Formular wurde übermittelt. WhatsApp sollte sich jetzt öffnen.';
+          statusElement.className = 'form-status success';
+          
+          // 如果是模态框表单，关闭模态框
+          if (formElement === modalForm) {
+            closeFormModal();
+          }
+          
+          // 重置表单
+          formElement.reset();
+          
+          // 重新启用按钮（延迟一点）
+          setTimeout(() => {
+            submitButton.disabled = false;
+            submitButton.textContent = 'KOSTENLOS STARTEN!';
+          }, 2000);
+          
+        }, 150); // 给GA上报留出时间
       }
       
       // Event-Listener
       form.addEventListener('submit', function(e) {
-        handleFormSubmit(e, form, formStatus);
+        handleFormSubmit(e, form, formStatus, submitBtn);
       });
       
       modalForm.addEventListener('submit', function(e) {
-        handleFormSubmit(e, modalForm, modalFormStatus);
+        handleFormSubmit(e, modalForm, modalFormStatus, modalSubmitBtn);
       });
       
       openFormBtn.addEventListener('click', function(e) {
@@ -1008,12 +1092,12 @@
         }
       });
       
-      // OK-Button im Erfolgsmodale - sofort zu WhatsApp weiterleiten
+      // OK-Button im Erfolgsmodale - 直接打开WhatsApp
       modalOkBtn.addEventListener('click', function() {
         window.open(assignedWhatsAppLink, '_blank');
       });
       
-      // Sanftes Scrollen hinzufügen
+      // 平滑滚动
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (anchor.getAttribute('href') !== '#' && 
             !anchor.classList.contains('open-form-btn') && 
@@ -1035,10 +1119,10 @@
         }
       });
       
-      // Echtzeit-Validierung aktivieren
+      // 启用实时验证
       addRealTimeValidation();
       
-      // Fade-In-Animationen hinzufügen
+      // 交叉观察器动画
       const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -1058,7 +1142,7 @@
         observer.observe(el);
       });
       
-      // Countdown-Timer
+      // 倒计时器
       function updateCountdown() {
         const now = new Date();
         const hours = 23 - now.getHours();
@@ -1070,14 +1154,9 @@
         document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
       }
       
-      // Countdown initialisieren und aktualisieren
+      // 初始化倒计时
       updateCountdown();
       setInterval(updateCountdown, 1000);
-      
-      // Ausstehende Konversionen erneut versuchen, wenn GA geladen ist
-      window.addEventListener('load', function() {
-        setTimeout(retryPendingConversions, 2000);
-      });
     });
   </script>
 </body>
