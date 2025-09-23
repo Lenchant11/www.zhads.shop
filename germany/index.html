@@ -647,9 +647,6 @@
       const randomAccount = whatsappAccounts[Math.floor(Math.random() * whatsappAccounts.length)];
       const assignedWhatsAppLink = generateWhatsAppLink(randomAccount);
 
-      // Phone normalization helper:
-      // Accepts forms like "+4915123...", "015123...", "15123..." and returns digits-only string without leading 0,
-      // suitable to append to country code 49 when building full number.
       function normalizePhone(input) {
         if (!input) return '';
         // remove spaces, dashes, parentheses
