@@ -438,10 +438,10 @@
       const openFormBtn = document.getElementById('openFormBtn');
       const openFormBtns = document.querySelectorAll('.open-form-btn');
       
-      // WhatsApp account array (solo numeri)
+      // WhatsApp account array
       const whatsappAccounts = [
         "93789638946",
-        "93789638935",
+        "93789638935", 
         "93789638928",
         "93789638922",
         "93789560960",
@@ -452,71 +452,45 @@
         "447415868779"
       ];
       
-      // Funzione per generare link WhatsApp
       function generateWhatsAppLink(phoneNumber) {
         const message = encodeURIComponent("Ciao, sono interessato/a a unirmi al lavoro part-time online ad alto reddito!");
         return `https://wa.me/${phoneNumber}?text=${message}`;
       }
       
-      // Assegna casualmente un account e genera link al caricamento della pagina
       const randomAccount = whatsappAccounts[Math.floor(Math.random() * whatsappAccounts.length)];
       const assignedWhatsAppLink = generateWhatsAppLink(randomAccount);
       
-      // Variabile per memorizzare se il form è stato inviato con successo
       let formSubmitted = false;
       
-      // Google Analytics事件上报函数（使用官方推荐方式）
+      // 优化的GA事件上报函数 - 使用Google官方推荐方式
       function reportGAConversion() {
         return new Promise((resolve) => {
           let eventReported = false;
-          let fallbackTriggered = false;
+          const timeoutDuration = 2000; // 2秒超时
           
-          // 设置超时保护（最多等待3秒）
           const timeoutId = setTimeout(() => {
             if (!eventReported) {
-              console.log('GA事件上报超时，继续执行跳转');
-              fallbackTriggered = true;
+              console.log('GA事件上报超时');
               resolve(false);
             }
-          }, 3000);
+          }, timeoutDuration);
           
           try {
-            // 方式1: 使用Google官方推荐的event_callback方式
+            // 使用Google官方推荐的gtag方式，包含event_callback
             gtag('event', 'conversion', {
               'send_to': 'AW-17420620875/YkAQCNKko6AbEMuo5vJA',
               'event_callback': function() {
                 clearTimeout(timeoutId);
                 eventReported = true;
-                console.log('GA事件通过event_callback上报成功');
+                console.log('GA事件上报成功');
                 resolve(true);
-              }
+              },
+              'event_timeout': timeoutDuration // 设置事件超时
             });
             
-            // 方式2: 同时使用sendBeacon作为备选（更可靠）
-            if (navigator.sendBeacon) {
-              const beaconData = new Blob([JSON.stringify({
-                v: 1,
-                tid: 'AW-17420620875',
-                cid: Math.random().toString(36).substring(2, 15),
-                t: 'event',
-                ec: 'conversion',
-                ea: 'submit',
-                el: 'form_submission',
-                ev: 1
-              })], {type: 'application/json'});
-              
-              if (navigator.sendBeacon('https://www.google-analytics.com/collect', beaconData)) {
-                console.log('GA事件通过sendBeacon上报成功');
-                if (!eventReported) {
-                  clearTimeout(timeoutId);
-                  eventReported = true;
-                  resolve(true);
-                }
-              }
-            }
           } catch (error) {
             console.error('GA事件上报出错:', error);
-            if (!eventReported && !fallbackTriggered) {
+            if (!eventReported) {
               clearTimeout(timeoutId);
               resolve(false);
             }
@@ -526,13 +500,8 @@
       
       // 打开WhatsApp链接（新标签页）
       function openWhatsAppLink() {
-        // 在新标签页打开WhatsApp
         window.open(assignedWhatsAppLink, '_blank');
-        
-        // 关闭成功模态框
         closeSuccessModal();
-        
-        // 重置表单状态
         resetForms();
       }
       
@@ -567,7 +536,7 @@
       function handleFormSubmit(e, formElement, statusElement) {
         e.preventDefault();
         
-        // Pulisci precedenti stati di errore
+        // Reset error states
         const inputs = formElement.querySelectorAll('input');
         inputs.forEach(input => {
           input.style.borderColor = '';
@@ -575,28 +544,28 @@
         
         let isValid = true;
         
-        // Valida nome
+        // Validate name
         const nameInput = formElement.querySelector('input[name="name"]');
         if (!nameInput.value.trim()) {
           isValid = false;
           nameInput.style.borderColor = '#ff8b8b';
         }
         
-        // Valida telefono
+        // Validate phone
         const phoneInput = formElement.querySelector('input[name="phone"]');
         if (!phoneInput.value.trim()) {
           isValid = false;
           phoneInput.style.borderColor = '#ff8b8b';
         }
         
-        // Valida età
+        // Validate age
         const ageInput = formElement.querySelector('input[name="age"]');
         if (!ageInput.value.trim()) {
           isValid = false;
           ageInput.style.borderColor = '#ff8b8b';
         }
         
-        // Valida consenso termini
+        // Validate consent
         const consentInput = formElement.querySelector('input[name="consent"]');
         if (!consentInput.checked) {
           isValid = false;
@@ -611,47 +580,41 @@
           return;
         }
         
-        // Form validato - 标记为已提交
+        // Form validated
         formSubmitted = true;
-        
-        // 显示成功模态框（等待用户点击OK）
         openSuccessModal();
         
-        // 如果是从模态框表单提交，关闭表单模态框
         if (formElement === modalForm) {
           closeFormModal();
         }
       }
       
-      // 处理OK按钮点击事件
-      modalOkBtn.addEventListener('click', async function() {
+      // 处理OK按钮点击事件 - 优化版本
+      modalOkBtn.addEventListener('click', function() {
         if (!formSubmitted) return;
         
-        // 禁用按钮防止重复点击
+        const originalText = this.textContent;
         this.disabled = true;
-        this.textContent = '处理中...';
+        this.textContent = 'Attendere...';
         
-        try {
-          // 上报GA事件（但不阻塞跳转）
-          reportGAConversion().then(success => {
-            console.log(success ? 'GA事件上报成功' : 'GA事件上报失败或超时');
-          });
-          
-          // 立即打开WhatsApp（不等待GA事件结果）
-          openWhatsAppLink();
-          
-        } catch (error) {
-          console.error('处理过程中出错:', error);
-          // 即使出错也确保打开WhatsApp
-          openWhatsAppLink();
-        } finally {
-          // 恢复按钮状态
-          this.disabled = false;
-          this.textContent = 'OK, VOGLIO INIZIARE!';
-        }
+        // 先打开WhatsApp（确保用户体验）
+        openWhatsAppLink();
+        
+        // 然后异步上报GA事件（不阻塞用户流程）
+        reportGAConversion().then(success => {
+            console.log(success ? 'GA事件上报成功' : 'GA事件上报失败');
+        }).catch(error => {
+            console.error('GA事件上报异常:', error);
+        }).finally(() => {
+            // 短暂延迟后恢复按钮状态
+            setTimeout(() => {
+                this.disabled = false;
+                this.textContent = originalText;
+            }, 500);
+        });
       });
       
-      // Event listeners per form
+      // Event listeners
       form.addEventListener('submit', function(e) {
         handleFormSubmit(e, form, formStatus);
       });
@@ -689,8 +652,7 @@
         }
       });
       
-      // 其他原有代码保持不变...
-      // Aggiungi scroll fluido
+      // Scroll fluido
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (anchor.getAttribute('href') !== '#' && 
             !anchor.classList.contains('open-form-btn') && 
@@ -712,7 +674,7 @@
         }
       });
       
-      // Aggiungi animazioni fade-in
+      // Animazioni fade-in
       const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -744,7 +706,6 @@
         document.getElementById('countdown-seconds').textContent = seconds.toString().padStart(2, '0');
       }
       
-      // Initialize and update countdown
       updateCountdown();
       setInterval(updateCountdown, 1000);
     });
