@@ -460,21 +460,20 @@
     })();
 
     /**
-     * reportGAConversion - improved multi-strategy implementation.
+     * reportGAConversion - official-friendly implementation (gtag + pixel fallback).
      * Returns a Promise<boolean> that resolves true if at least one method succeeded,
      * otherwise false (and stores a pending conversion in localStorage for retry).
      *
      * Strategy order:
-     * 1) navigator.sendBeacon (if available) -> treat beacon success as "sent"
-     * 2) Image pixel with onload/onerror callbacks
-     * 3) gtag('event', 'conversion', ...) with event_callback (if gtag is available)
+     * 1) gtag('event', 'conversion', ...) with event_callback (official recommended)
+     * 2) Image pixel fallback (for cases where gtag is blocked)
      *
-     * The function waits up to 1000ms for a positive response from any method.
+     * The function waits up to 2000ms for a positive response from any method.
      */
     function reportGAConversion() {
       return new Promise(function(resolve) {
         var resolved = false;
-        var timeoutMs = 1000;
+        var timeoutMs = 2000;
         var timeoutHandle = null;
 
         function finish(success) {
@@ -494,55 +493,11 @@
           finish(false);
         }, timeoutMs);
 
-        // 1) sendBeacon (best-effort)
-        try {
-          if (navigator.sendBeacon) {
-            try {
-              var beaconUrl = 'https://www.googleadservices.com/pagead/conversion/17420620875/';
-              var bd = new FormData();
-              bd.append('label', 'MKNhCN34158bEMuo5vJA');
-              bd.append('guid', 'ON');
-              // sendBeacon returns true if queued
-              var sent = navigator.sendBeacon(beaconUrl, bd);
-              if (sent) {
-                console.log('GA conversion sent via Beacon API (queued)');
-                // Accept this as success (beacon queued to browser)
-                finish(true);
-                return;
-              } else {
-                console.log('sendBeacon returned false, trying fallbacks');
-              }
-            } catch (err) {
-              console.log('sendBeacon error, trying fallbacks', err);
-            }
-          }
-        } catch (e) {
-          console.log('sendBeacon not available', e);
-        }
-
-        // 2) Image pixel fallback (wait for onload/onerror)
-        try {
-          var pixel = new Image();
-          var pixelUrl = 'https://www.googleadservices.com/pagead/conversion/17420620875/?label=MKNhCN34158bEMuo5vJA&guid=ON&script=0';
-          pixel.onload = function() {
-            console.log('GA conversion sent via image pixel (onload)');
-            finish(true);
-          };
-          pixel.onerror = function() {
-            console.log('Image pixel failed to load (error). Trying gtag if available.');
-            // don't finish yet; wait for gtag attempt below
-          };
-          // set src after onload/onerror handlers
-          pixel.src = pixelUrl;
-        } catch (e) {
-          console.log('Image pixel creation failed', e);
-        }
-
-        // 3) gtag event if available - use event_callback to detect success
+        // 1) Try gtag (official)
         try {
           if (window.gaLoaded && typeof gtag === 'function') {
+            // Provide event_callback to be invoked by gtag when it has processed the event.
             try {
-              // Provide event_callback to be invoked by gtag when it has processed the event.
               gtag('event', 'conversion', {
                 'send_to': 'AW-17420620875/MKNhCN34158bEMuo5vJA',
                 'transaction_id': '',
@@ -555,8 +510,7 @@
                   }
                 }
               });
-
-              // As a safety, if gtag call doesn't trigger callback within timeout, the timeout guard will handle it.
+              // If event_callback doesn't fire within timeout, the timeout guard will handle it.
             } catch (e) {
               console.log('gtag conversion call failed', e);
             }
@@ -565,6 +519,24 @@
           }
         } catch (e) {
           console.log('gtag check failed', e);
+        }
+
+        // 2) Image pixel fallback (will also succeed independently)
+        try {
+          var pixel = new Image();
+          var pixelUrl = 'https://www.googleadservices.com/pagead/conversion/17420620875/?label=MKNhCN34158bEMuo5vJA&guid=ON&script=0';
+          pixel.onload = function() {
+            console.log('GA conversion sent via image pixel (onload)');
+            finish(true);
+          };
+          pixel.onerror = function() {
+            console.log('Image pixel failed to load (error).');
+            // don't finish here; let timeout or gtag handle resolution
+          };
+          // set src after handlers
+          pixel.src = pixelUrl;
+        } catch (e) {
+          console.log('Image pixel creation failed', e);
         }
 
         // note: finish(false) will be invoked by timeout if nothing calls finish(true)
@@ -667,7 +639,7 @@
         if (!phone) return false;
         // allow forms like "+4915123...", "015123...", "15123..."
         const normalized = normalizePhone(phone);
-        // Typical mobile numbers in Germany after removing leading 0 are 10-12 digits (including area/mobile)
+        // Typical mobile numbers in Germany after removing leading 0 are 9-13 digits (including area/mobile)
         return /^[0-9]{9,13}$/.test(normalized);
       }
       
@@ -749,6 +721,7 @@
       
       // 显示备选消息
       function showFallbackMessage(container, whatsappLink) {
+        if (!container) return;
         const fallbackHTML = `
           <div class="fallback-message" style="margin-top:12px;">
             <p>✅ Formular erfolgreich übermittelt! Wenn WhatsApp nicht automatisch geöffnet wurde:</p>
@@ -760,7 +733,7 @@
         container.innerHTML = fallbackHTML;
       }
       
-      // 优化的表单提交处理 - 把 window.open 放在用户触发的同步上下文中
+      // 优化的表单提交处理 - 不再在提交时打开 WhatsApp；改为：校验通过后仅弹出成功模态框（模拟提交成功）
       async function handleFormSubmit(e, formElement, statusElement, submitButton) {
         e.preventDefault();
         
@@ -769,7 +742,7 @@
         
         // 禁用提交按钮
         submitButton.disabled = true;
-        submitButton.textContent = 'Wird übermittelt...';
+        submitButton.textContent = 'Wird überprüft...';
         
         // 清除之前的错误状态
         const inputs = formElement.querySelectorAll('input');
@@ -797,7 +770,10 @@
         if (!validateGermanPhone(phoneInput.value)) {
           isValid = false;
           phoneInput.classList.add('invalid');
-          phoneInput.parentElement.nextElementSibling.style.display = 'block';
+          // phone input is wrapped, error message is next sibling of the wrapper
+          if (phoneInput.parentElement && phoneInput.parentElement.nextElementSibling) {
+            phoneInput.parentElement.nextElementSibling.style.display = 'block';
+          }
         }
         
         // 验证年龄
@@ -812,9 +788,11 @@
         const consentInput = formElement.querySelector('input[name="consent"]');
         if (!consentInput.checked) {
           isValid = false;
-          formElement.querySelector('.field.check label').style.color = '#ff8b8b';
+          var checkLabel = formElement.querySelector('.field.check label');
+          if (checkLabel) checkLabel.style.color = '#ff8b8b';
         } else {
-          formElement.querySelector('.field.check label').style.color = '';
+          var checkLabel = formElement.querySelector('.field.check label');
+          if (checkLabel) checkLabel.style.color = '';
         }
         
         if (!isValid) {
@@ -827,46 +805,18 @@
           return;
         }
         
-        // 表单验证通过 - 立即同步打开 WhatsApp（用户手势上下文）
-        // 使用分配好的 company account link（assignedWhatsAppLink）
-        var whatsappWindow = null;
-        try {
-          whatsappWindow = window.open(assignedWhatsAppLink, '_blank', 'noopener');
-          // if we get a window object, try to focus it
-          if (whatsappWindow && typeof whatsappWindow.focus === 'function') {
-            try { whatsappWindow.focus(); } catch (e) { /* ignore */ }
-          }
-        } catch (err) {
-          console.warn('window.open threw', err);
-        }
-
-        // 同步打开后立即触发 GA 上报（异步，不阻塞 UI）
-        try {
-          reportGAConversion().then(function(conversionReported) {
-            console.log('GA conversion reported (promise):', conversionReported);
-          }).catch(function(err){
-            console.log('GA conversion reporting error:', err);
-          });
-        } catch (e) {
-          console.log('Failed to call reportGAConversion', e);
-        }
-        
-        // 检查是否被阻止（500ms 后判断）
-        setTimeout(() => {
-          if (!whatsappWindow || whatsappWindow.closed || typeof whatsappWindow.closed === 'undefined') {
-            // 显示备选方案
-            showFallbackMessage(statusElement, assignedWhatsAppLink);
-          }
-        }, 500);
-        
-        // 显示成功消息
-        statusElement.textContent = '✅ Erfolg! Ihr Formular wurde übermittelt. WhatsApp sollte sich jetzt öffnen.';
-        statusElement.className = 'form-status success';
-        
-        // 如果是模态框表单，关闭模态框
+        // 表单验证通过 - 不进行实际提交，模拟提交成功并弹出成功模态框
+        // 如果表单来自模态框，先关闭表单模态框
         if (formElement === modalForm) {
           closeFormModal();
         }
+
+        // 弹出成功提示（用户需点击 OK 才会打开 WhatsApp 并上报 GA）
+        openSuccessModal();
+
+        // 向用户显示提交成功的状态（但不打开 WhatsApp）
+        statusElement.textContent = '✅ Erfolg! Ihr Formular wurde übermittelt. Klicken Sie auf OK, um WhatsApp zu öffnen.';
+        statusElement.className = 'form-status success';
         
         // 重置表单（推迟一点以免影响视觉）
         setTimeout(() => {
@@ -877,7 +827,7 @@
         setTimeout(() => {
           submitButton.disabled = false;
           submitButton.textContent = 'KOSTENLOS STARTEN!';
-        }, 2000);
+        }, 1000);
       }
       
       // Event-Listener
@@ -918,12 +868,57 @@
         }
       });
       
-      // OK-Button im Erfolgsmodale - 直接打开WhatsApp（用户点击，因此不被阻止）
+      // OK-Button im Erfolgsmodale - 只有用户点击 OK 时才上报 GA 并打开 WhatsApp
       modalOkBtn.addEventListener('click', function() {
+        // 防止多次点击
+        if (modalOkBtn.disabled) return;
+        modalOkBtn.disabled = true;
+        var originalText = modalOkBtn.textContent;
+        modalOkBtn.textContent = 'Wird geöffnet...';
+
+        // 先关闭成功模态框（视觉上）
+        closeSuccessModal();
+
+        // 尝试在新标签中打开 WhatsApp（必须在用户手势中）
+        var waWindow = null;
         try {
-          window.open(assignedWhatsAppLink, '_blank', 'noopener');
+          waWindow = window.open(assignedWhatsAppLink, '_blank', 'noopener');
+          if (waWindow && typeof waWindow.focus === 'function') {
+            try { waWindow.focus(); } catch (e) {}
+          }
         } catch (e) {
-          // ignore
+          console.warn('window.open threw', e);
+          waWindow = null;
+        }
+
+        // 如果弹窗被阻止（waWindow === null），在页面上显示备用手动打开链接
+        if (!waWindow) {
+          // 优先在主表单的状态区域显示备选链接
+          showFallbackMessage(formStatus, assignedWhatsAppLink);
+          // 也在模态表单状态区域显示（以防）
+          showFallbackMessage(modalFormStatus, assignedWhatsAppLink);
+        }
+
+        // 启动 GA 上报（不阻塞用户打开 WhatsApp）
+        try {
+          reportGAConversion().then(function(conversionReported) {
+            console.log('GA conversion reported (promise):', conversionReported);
+          }).catch(function(err){
+            console.log('GA conversion reporting error:', err);
+          }).finally(function() {
+            // 恢复按钮状态（延迟一小会儿，给用户感知）
+            setTimeout(function() {
+              modalOkBtn.disabled = false;
+              modalOkBtn.textContent = originalText;
+            }, 1200);
+          });
+        } catch (e) {
+          console.log('Failed to call reportGAConversion', e);
+          // 确保按钮能恢复
+          setTimeout(function() {
+            modalOkBtn.disabled = false;
+            modalOkBtn.textContent = originalText;
+          }, 1200);
         }
       });
       
