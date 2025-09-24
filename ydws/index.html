@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Remote Work Opportunities | Apply Online</title>
+  <title>Remote Work Opportunities | Apply Online - Limited Time Offer!</title>
   <meta name="description" content="Apply for flexible remote tasks and roles. Work from home or anywhere. No application fees. Transparent terms and privacy-first." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -45,6 +45,8 @@
       --orange-300:#ffa057;
       --green:#19c37d;
       --blue:#3b82f6;
+      --indian-saffron:#FF9933;
+      --indian-green:#138808;
       --ring: 0 0 0 3px rgba(255,122,26,.25);
       --radius:12px;
       --transition: all 0.3s ease;
@@ -59,7 +61,8 @@
 
     .nav{position:sticky;top:0;z-index:50;background:rgba(7,10,15,.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:10px 0}
-    .brand{font-weight:800;letter-spacing:.3px;font-size:1.2rem;}
+    .brand{font-weight:800;letter-spacing:.3px;font-size:1.2rem; display: flex; align-items: center; gap: 8px;}
+    .brand:before {content: "🇮🇳";}
     .nav-links{display:flex;gap:16px;align-items:center}
     .nav-link{opacity:.85; transition: var(--transition); font-size: 0.95rem;}
     .nav-link:hover{opacity:1; color: var(--orange);}
@@ -70,6 +73,18 @@
     .btn-orange{background:var(--orange);color:#0b0f14; box-shadow: 0 4px 10px rgba(255, 122, 26, 0.25);}
     .btn-orange:hover{background:var(--orange-600); transform: translateY(-2px); box-shadow: 0 6px 14px rgba(255, 122, 26, 0.35);}
     .btn:focus{outline:none;box-shadow:var(--ring)}
+    
+    /* Urgency Banner */
+    .urgency-banner {background: linear-gradient(90deg, var(--indian-saffron), var(--indian-green)); color: white; text-align: center; padding: 8px; font-weight: 600; font-size: 0.9rem; position: relative; overflow: hidden;}
+    .urgency-banner:before {content: "🔥"; margin-right: 8px;}
+    .urgency-banner:after {content: "🔥"; margin-left: 8px;}
+    .urgency-banner .blink {animation: blink 1.5s infinite; display: inline-block; margin: 0 5px;}
+    
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
     
     .hero{position:relative;padding:60px 0 30px; overflow: hidden;}
     .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:stretch}
@@ -146,7 +161,7 @@
     .three-col{grid-template-columns:repeat(3,minmax(0,1fr))}
     .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);padding:20px; transition: var(--transition);}
     .card:hover {transform: translateY(-3px); border-color: rgba(255,255,255,0.15); box-shadow: 0 8px 24px rgba(0,0,0,0.15);}
-    .card-media{height:140px;border-radius:10px;background:linear-gradient(135deg,#152238,#1d2a44); position: relative; overflow: hidden;}
+    .card-media{height:140px;border-radius:10px;background:linear-gradient(135deg,#152238,#1d2a44); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;}
     .card-media:after {
         content: "";
         position: absolute;
@@ -246,6 +261,25 @@
       animation: pulse 2s infinite;
     }
     
+    /* Urgent badge */
+    .urgent-badge {
+      background: linear-gradient(90deg, #ff3333, #ff6666);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 10px;
+      animation: pulse 1.5s infinite;
+    }
+    
+    .urgent-badge:before {
+      content: "⏰";
+      margin-right: 5px;
+    }
+    
     /* Mobile responsiveness */
     @media (max-width: 980px){
       .hero-grid{grid-template-columns:1fr; gap: 28px;}
@@ -293,15 +327,22 @@
   </style>
 </head>
 <body>
+  <!-- Urgency Banner -->
+  <div class="urgency-banner">
+    <span class="blink">🚨</span> 
+    Limited Time Offer! Only <strong>23 spots</strong> remaining for this week - Apply Now before they're gone!
+    <span class="blink">🚨</span>
+  </div>
+
   <!-- Top Nav -->
   <header class="nav">
     <div class="container nav-inner">
-      <a class="brand" href="#top" aria-label="Home">RemoteWork</a>
+      <a class="brand" href="#top" aria-label="Home">RemoteWork India</a>
       <nav class="nav-links">
         <a href="#roles" class="nav-link">Roles</a>
         <a href="#benefits" class="nav-link">Benefits</a>
         <a href="#faq" class="nav-link">FAQ</a>
-        <a href="#" class="btn btn-orange" id="openFormBtn">Apply now</a>
+        <a href="#" class="btn btn-orange" id="openFormBtn">Apply now <span class="urgent-badge">URGENT</span></a>
       </nav>
     </div>
   </header>
@@ -310,9 +351,9 @@
   <section id="top" class="hero">
     <div class="container hero-grid">
       <div class="hero-copy fade-in">
-        <h1>Work From Anywhere, Earn Every Day</h1>
+        <h1>🇮🇳 Work From Anywhere in India, Earn Every Day 💰</h1>
         <p class="subtitle">
-          Join thousands of remote workers earning steady income with flexible tasks that fit your schedule. No experience required.
+          Join <strong>50,000+</strong> Indian remote workers earning steady income with flexible tasks that fit your schedule. No experience required. <strong>Limited spots available!</strong>
         </p>
 
         <!-- credibility logos -->
@@ -325,16 +366,17 @@
         </div>
 
         <ul class="hero-points">
-          <li>Flexible hours • Work from home</li>
-          <li>No application fees — ever</li>
-          <li>Clear guidelines, fast support</li>
-          <li>Daily payouts • Beginner-friendly</li>
+          <li>🇮🇳 Flexible hours • Work from anywhere in India</li>
+          <li>💸 No application fees — ever</li>
+          <li>📱 Clear guidelines, fast WhatsApp support</li>
+          <li>💰 Daily payouts • Beginner-friendly</li>
+          <li>⏰ <strong>Limited spots - Apply now before deadline!</strong></li>
         </ul>
       </div>
 
       <aside id="apply" class="form-card fade-in delay-1" aria-label="Application Form">
-        <h2 class="form-title">Start Earning in 24 Hours</h2>
-        <p class="form-note">Complete this short form and we'll contact you on WhatsApp within hours.</p>
+        <h2 class="form-title">🚀 Start Earning in 24 Hours</h2>
+        <p class="form-note"><strong>Hurry!</strong> Only a few spots left this week. Complete this short form and we'll contact you on WhatsApp within hours.</p>
         
         <div class="progress-bar">
           <div class="progress-step active"></div>
@@ -369,7 +411,7 @@
             <label for="consent">I agree to the <a href="#privacy">Privacy Policy</a> and <a href="#terms">Terms</a>.</label>
           </div>
 
-          <button type="submit" class="btn btn-orange btn-block pulse">Apply Now & Start Earning</button>
+          <button type="submit" class="btn btn-orange btn-block pulse">🚀 Apply Now & Start Earning</button>
           
           <div class="security-badge">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -391,7 +433,7 @@
   <div class="modal" id="successModal">
     <div class="modal-content" aria-labelledby="modalTitle" role="dialog" aria-modal="true">
       <button class="modal-close" id="modalCloseBtn" aria-label="Close">&times;</button>
-      <h3 class="modal-title" id="modalTitle">Success!</h3>
+      <h3 class="modal-title" id="modalTitle">🎉 Success!</h3>
       <p class="modal-message">Application submitted successfully. Click OK to contact our customer service immediately on WhatsApp.</p>
       <button class="modal-btn" id="modalOkBtn">OK</button>
     </div>
@@ -401,8 +443,8 @@
   <div class="modal" id="formModal">
     <div class="modal-content" style="max-width: 500px;" aria-labelledby="modalFormTitle" role="dialog" aria-modal="true">
       <button class="modal-close" id="formModalCloseBtn" aria-label="Close">&times;</button>
-      <h2 class="form-title" id="modalFormTitle">Apply Now</h2>
-      <p class="form-note">Complete this short form and we'll contact you on WhatsApp within hours.</p>
+      <h2 class="form-title" id="modalFormTitle">🚀 Apply Now - Limited Spots!</h2>
+      <p class="form-note"><strong>Hurry!</strong> Only a few spots left this week. Complete this short form and we'll contact you on WhatsApp within hours.</p>
       
       <div class="progress-bar">
         <div class="progress-step active"></div>
@@ -437,7 +479,7 @@
           <label for="modal-consent">I agree to the <a href="#privacy">Privacy Policy</a> and <a href="#terms">Terms</a>.</label>
         </div>
 
-        <button type="submit" class="btn btn-orange btn-block pulse">Apply Now & Start Earning</button>
+        <button type="submit" class="btn btn-orange btn-block pulse">🚀 Apply Now & Start Earning</button>
         
         <div class="security-badge">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -452,18 +494,23 @@
     </div>
   </div>
 
-  <!-- Rest of the page content remains the same -->
   <!-- Hiring (Part-time & Full-time) -->
   <section id="roles" class="section">
     <div class="container">
       <div class="section-header fade-in">
-        <h2>Choose Your Flexible Work Style</h2>
-        <p class="muted">Earnings shown are typical ranges reported by workers. Your results depend on time, skills, and availability.</p>
+        <h2>🇮🇳 Choose Your Flexible Work Style</h2>
+        <p class="muted">Earnings shown are typical ranges reported by Indian workers. Your results depend on time, skills, and availability. <strong>Limited spots available!</strong></p>
       </div>
 
       <div class="cards two-col">
         <article class="card fade-in">
-          <div class="card-media media-pt"></div>
+          <div class="card-media media-pt">
+            <div style="color: white; text-align: center; z-index: 2; position: relative; padding: 20px;">
+              <div style="font-size: 48px;">💼</div>
+              <div style="font-weight: 700; margin-top: 10px;">Part-time Job</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">Perfect for students & side income</div>
+            </div>
+          </div>
           <div class="card-body">
             <div class="earnings-badge">₹200–₹1,500 / day</div>
             <h3>Part-time job</h3>
@@ -474,12 +521,18 @@
               <li><strong>Skills:</strong> Basic digital literacy is a plus</li>
               <li><strong>Work style:</strong> Flexible, remote</li>
             </ul>
-            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">Apply for Part-time</a>
+            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">Apply for Part-time <span class="urgent-badge">HOT</span></a>
           </div>
         </article>
 
         <article class="card fade-in delay-1">
-          <div class="card-media media-ft"></div>
+          <div class="card-media media-ft">
+            <div style="color: white; text-align: center; z-index: 2; position: relative; padding: 20px;">
+              <div style="font-size: 48px;">💻</div>
+              <div style="font-weight: 700; margin-top: 10px;">Full-time Job</div>
+              <div style="font-size: 0.9rem; opacity: 0.9;">Serious earnings potential</div>
+            </div>
+          </div>
           <div class="card-body">
             <div class="earnings-badge">₹3,000+ / day</div>
             <h3>Full-time job</h3>
@@ -490,7 +543,7 @@
               <li><strong>Skills:</strong> Strong digital literacy preferred</li>
               <li><strong>Work style:</strong> Flexible, remote</li>
             </ul>
-            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">Apply for Full-time</a>
+            <a href="#" class="btn btn-orange open-form-btn" style="margin-top: 14px;">Apply for Full-time <span class="urgent-badge">HOT</span></a>
           </div>
         </article>
       </div>
@@ -501,8 +554,8 @@
   <section class="section alt">
     <div class="container">
       <div class="section-header fade-in">
-        <h2>Earn Bonus Rewards for Consistency</h2>
-        <p class="muted">Stay active and unlock additional earnings on top of your regular task payments.</p>
+        <h2>🎁 Earn Bonus Rewards for Consistency</h2>
+        <p class="muted">Stay active and unlock additional earnings on top of your regular task payments. <strong>Limited time bonus offers!</strong></p>
       </div>
       
       <div class="cards three-col">
@@ -522,7 +575,7 @@
           <p>Stay active for 30 days to receive our highest monthly loyalty bonus.</p>
         </div>
       </div>
-      <p class="muted" style="text-align: center; margin-top: 20px;">Bonuses depend on task availability and quality review. Terms apply.</p>
+      <p class="muted" style="text-align: center; margin-top: 20px;">Bonuses depend on task availability and quality review. Terms apply. <strong>Apply now to qualify!</strong></p>
     </div>
   </section>
 
@@ -530,8 +583,8 @@
   <section class="section" aria-labelledby="req-title">
     <div class="container">
       <div class="section-header fade-in">
-        <h2 id="req-title">Everything You Need to Get Started</h2>
-        <p class="muted">Simple requirements to begin your remote work journey with us.</p>
+        <h2 id="req-title">🇮🇳 Everything You Need to Get Started</h2>
+        <p class="muted">Simple requirements to begin your remote work journey with us. <strong>Limited spots available this week!</strong></p>
       </div>
       
       <div class="requirements">
@@ -580,14 +633,14 @@
       <div class="benefits-grid">
         <div class="benefits-media fade-in"></div>
         <div class="benefits-copy fade-in delay-1">
-          <h2>Truly work from home (or wherever you want)</h2>
+          <h2>🇮🇳 Truly work from home (or wherever you want in India)</h2>
           <ul class="stats">
-            <li><strong>50,000+</strong> applicants</li>
+            <li><strong>50,000+</strong> Indian applicants</li>
             <li><strong>100,000+</strong> tasks offered</li>
             <li><strong>500+</strong> support staff</li>
             <li><strong>95%</strong> satisfaction</li>
           </ul>
-          <p class="muted">Figures are internal aggregates updated periodically and are provided for transparency, not as guarantees.</p>
+          <p class="muted">Figures are internal aggregates updated periodically and are provided for transparency, not as guarantees. <strong>Apply now before spots fill up!</strong></p>
         </div>
       </div>
     </div>
@@ -597,24 +650,24 @@
   <section class="section">
     <div class="container">
       <div class="section-header fade-in">
-        <h2>Hear From Our Remote Workers</h2>
-        <p class="muted">Real people, real experiences working with our platform.</p>
+        <h2>🇮🇳 Hear From Our Indian Remote Workers</h2>
+        <p class="muted">Real Indian people, real experiences working with our platform.</p>
       </div>
       
       <div class="cards three-col">
         <blockquote class="testimonial fade-in">
           <div class="avatar">A</div>
-          <p>"Clear tasks and fast responses. Got my first payout the same day."</p>
+          <p>"Clear tasks and fast responses. Got my first payout the same day. Perfect for my schedule in Mumbai!"</p>
           <footer>— A., Mumbai</footer>
         </blockquote>
         <blockquote class="testimonial fade-in delay-1">
           <div class="avatar">R</div>
-          <p>"I do this after work. The flexibility really helps with extra income."</p>
+          <p>"I do this after work. The flexibility really helps with extra income. Great for Bengaluru lifestyle."</p>
           <footer>— R., Bengaluru</footer>
         </blockquote>
         <blockquote class="testimonial fade-in delay-2">
           <div class="avatar">N</div>
-          <p>"Simple steps with honest expectations. No fees to apply or hidden charges."</p>
+          <p>"Simple steps with honest expectations. No fees to apply or hidden charges. Recommended for Delhiites!"</p>
           <footer>— N., Delhi</footer>
         </blockquote>
       </div>
@@ -625,10 +678,10 @@
   <section class="section cta">
     <div class="container cta-inner fade-in">
       <div>
-        <h2>Limited Spots Available - Apply Today</h2>
-        <p class="muted">New tasks are added daily, but positions fill quickly. Submit your application now to secure your spot.</p>
+        <h2>⏰ Limited Spots Available - Apply Today!</h2>
+        <p class="muted"><strong>Hurry!</strong> New tasks are added daily, but positions fill quickly. Only 23 spots remaining this week. Submit your application now to secure your spot.</p>
       </div>
-      <a class="btn btn-orange btn-lg pulse open-form-btn" href="#">Apply Now</a>
+      <a class="btn btn-orange btn-lg pulse open-form-btn" href="#">🚀 Apply Now - Limited Time!</a>
     </div>
   </section>
 
@@ -636,7 +689,7 @@
   <section id="faq" class="section alt">
     <div class="container">
       <div class="section-header fade-in">
-        <h2>Frequently Asked Questions</h2>
+        <h2>🇮🇳 Frequently Asked Questions</h2>
         <p class="muted">Everything you need to know before getting started.</p>
       </div>
       
@@ -646,7 +699,7 @@
       </details>
       <details class="faq fade-in">
         <summary>How do payouts work?</summary>
-        <div>Payouts are processed after tasks pass quality checks. Timing can vary by method and region, but most workers receive payment within 24 hours of task completion.</div>
+        <div>Payouts are processed after tasks pass quality checks. Timing can vary by method and region, but most Indian workers receive payment within 24 hours of task completion.</div>
       </details>
       <details class="faq fade-in">
         <summary>What equipment do I need?</summary>
@@ -656,6 +709,10 @@
         <summary>How will you contact me?</summary>
         <div>We primarily contact via WhatsApp. You'll receive step-by-step instructions once you apply.</div>
       </details>
+      <details class="faq fade-in">
+        <summary>Is this available throughout India?</summary>
+        <div>Yes! Our remote work opportunities are available to residents across all states and union territories of India.</div>
+      </details>
     </div>
   </section>
 
@@ -663,8 +720,8 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div>
-        <a class="brand" href="#top">RemoteWork</a>
-        <p class="muted small">Transparent opportunities. No guaranteed income. No application fees.</p>
+        <a class="brand" href="#top">RemoteWork India</a>
+        <p class="muted small">Transparent opportunities for Indians. No guaranteed income. No application fees.</p>
       </div>
       <nav class="footer-links">
         <a id="privacy" href="privacy.html" rel="nofollow">Privacy Policy</a>
@@ -672,7 +729,7 @@
       </nav>
     </div>
     <div class="container">
-      <p class="muted small">© 2023 RemoteWork. All rights reserved. Earnings shown are examples only and not guarantees. Your actual earnings depend on your skills, time, and task availability.</p>
+      <p class="muted small">© 2023 RemoteWork India. All rights reserved. Earnings shown are examples only and not guarantees. Your actual earnings depend on your skills, time, and task availability. Limited spots available.</p>
     </div>
   </footer>
 
@@ -870,6 +927,19 @@
       document.querySelectorAll('.fade-in').forEach(el => {
         observer.observe(el);
       });
+      
+      // 添加倒计时效果
+      function updateCountdown() {
+        const countdownElement = document.querySelector('.urgency-banner');
+        if (countdownElement) {
+          // 模拟剩余名额减少
+          const spots = Math.max(1, 23 - Math.floor(Math.random() * 5));
+          countdownElement.innerHTML = `<span class="blink">🚨</span> Limited Time Offer! Only <strong>${spots} spots</strong> remaining for this week - Apply Now before they're gone! <span class="blink">🚨</span>`;
+        }
+      }
+      
+      // 每30秒更新一次倒计时
+      setInterval(updateCountdown, 30000);
     });
   </script>
 </body>
